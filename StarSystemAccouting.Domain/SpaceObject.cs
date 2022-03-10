@@ -13,6 +13,7 @@ namespace StarSystemAccouting.Domain
         public double Age { get; set; }
         public double Diameter { get; set; }
         public double Weight { get; set; }
+        public string StarSystemName { get; set; }
         public StarSystem StarSystem { get; set; }
     }
 }

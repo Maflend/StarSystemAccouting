@@ -10,7 +10,7 @@ namespace StarSystemAccouting.Domain
     {
         public string Name { get; set; }
         public double Age { get; set; }
-        public SpaceObject CenterOfGravity { get; set; }
+        public string CenterOfGravityName { get; set; }
         public List<SpaceObject> SpaceObjects { get; set; }
     }
 }
