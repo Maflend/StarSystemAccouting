@@ -5,7 +5,9 @@ VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StarSystemAccouting.Server", "StarSystemAccouting.Server\StarSystemAccouting.Server.csproj", "{A07BA71F-30D1-4986-BDEA-922CB087892E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarSystemAccouting.Domain", "StarSystemAccouting.Domain\StarSystemAccouting.Domain.csproj", "{668C6951-C95F-4070-932A-125D5F0A42D3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StarSystemAccouting.Domain", "StarSystemAccouting.Domain\StarSystemAccouting.Domain.csproj", "{668C6951-C95F-4070-932A-125D5F0A42D3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarSystemAccouting.Persistence", "StarSystemAccouting.Persistence\StarSystemAccouting.Persistence.csproj", "{A633C943-5A67-4CDA-AD75-C48C5B2E2F56}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{668C6951-C95F-4070-932A-125D5F0A42D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{668C6951-C95F-4070-932A-125D5F0A42D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{668C6951-C95F-4070-932A-125D5F0A42D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A633C943-5A67-4CDA-AD75-C48C5B2E2F56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A633C943-5A67-4CDA-AD75-C48C5B2E2F56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A633C943-5A67-4CDA-AD75-C48C5B2E2F56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A633C943-5A67-4CDA-AD75-C48C5B2E2F56}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
