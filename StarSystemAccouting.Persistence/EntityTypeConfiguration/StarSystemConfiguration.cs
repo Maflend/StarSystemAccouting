@@ -22,7 +22,7 @@ namespace StarSystemAccouting.Persistence.EntityTypeConfiguration
             builder.Property(e => e.CenterOfGravityName).IsRequired();
 
 
-            builder.HasMany(e => e.SpaceObjects).WithOne(s => s.StarSystem).HasForeignKey(e => e.StarSystemName);
+            builder.HasMany(e => e.SpaceObjects).WithOne(s => s.StarSystem).HasForeignKey(e => e.StarSystemId);
             
         }
     }
