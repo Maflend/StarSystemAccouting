@@ -14,10 +14,10 @@ namespace StarSystemAccouting.Persistence
     {
         public static void AddPersistence(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<AppContext>(options =>
+            services.AddDbContext<ApplicationContext>(options =>
             options.UseNpgsql(configuration.GetConnectionString("PostgreConnection")));
 
-            services.AddScoped<IAppContext>(provider => provider.GetService<AppContext>());
+            services.AddScoped<IAppContext>(provider => provider.GetService<ApplicationContext>());
         }
     }
 }
