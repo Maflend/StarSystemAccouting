@@ -8,6 +8,7 @@ namespace StarSystemAccouting.Domain
 {
     public class SpaceObject
     {
+        public Guid Id { get; set; }
         public string Name { get; set; }
         public string Type { get; set; }
         public double Age { get; set; }
