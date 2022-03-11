@@ -10,9 +10,13 @@ using System.Threading.Tasks;
 
 namespace StarSystemAccouting.Persistence
 {
-    public class AppContext : DbContext, IAppContext
+    public class ApplicationContext : DbContext, IAppContext
     {
-        public AppContext(DbContextOptions<AppContext> options) : base(options) { }
+        public ApplicationContext()
+        {
+
+        }
+        public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options) { }
         public DbSet<SpaceObject> SpaceObjects { get; set; }
         public DbSet<StarSystem> StarSystems { get; set; }
 

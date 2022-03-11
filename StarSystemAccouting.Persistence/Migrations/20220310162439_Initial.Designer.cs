@@ -10,7 +10,7 @@ using StarSystemAccouting.Persistence;
 
 namespace StarSystemAccouting.Persistence.Migrations
 {
-    [DbContext(typeof(AppContext))]
+    [DbContext(typeof(ApplicationContext))]
     [Migration("20220310162439_Initial")]
     partial class Initial
     {
