@@ -10,7 +10,7 @@ using StarSystemAccouting.Persistence;
 
 namespace StarSystemAccouting.Persistence.Migrations
 {
-    [DbContext(typeof(AppContext))]
+    [DbContext(typeof(ApplicationContext))]
     partial class AppContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

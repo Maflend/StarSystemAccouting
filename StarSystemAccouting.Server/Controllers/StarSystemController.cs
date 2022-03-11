@@ -18,7 +18,7 @@ namespace StarSystemAccouting.Server.Controllers
             _starSystemService = starSystemService;
         }
         [HttpPost]
-        public async Task<ActionResult<StarSystemResponse>> Create(StarSystemRequest request)
+        public async Task<ActionResult<StarSystemResponse>> Create(StarSystemForCreateRequest request)
         {
             //if(!ModelState.IsValid)
             //{
@@ -38,6 +38,40 @@ namespace StarSystemAccouting.Server.Controllers
 
             return Ok(response);
 
+        }
+
+        [HttpDelete]
+        public async Task<ActionResult<string>> Delete(string name)
+        {
+            if(string.IsNullOrWhiteSpace(name))
+            {
+                return BadRequest("string is empty");
+            }
+
+            var response = await _starSystemService.DeleteAsync(name);
+
+            if(!response.Status)
+            {
+                return BadRequest(response.Message);
+            }
+
+            return Ok(response);
+        }
+        [HttpPost("/Update")]
+        public async Task<ActionResult<string>> Update(StarSystemForUpdateRequest request)
+        {
+            if(!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var response = await _starSystemService.UpdateAsync(request);
+
+            if(!response.Status)
+            {
+                return BadRequest(response.Message);
+            }
+
+            return Ok(response);
         }
     }
 }

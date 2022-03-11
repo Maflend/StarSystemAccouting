@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using StarSystemAccouting.Domain;
 using System;
 using System.Collections.Generic;
@@ -14,5 +15,7 @@ namespace StarSystemAccouting.Application
         public DbSet<StarSystem> StarSystems { get; set; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
+
+        EntityEntry Entry(object entity);
     }
 }
