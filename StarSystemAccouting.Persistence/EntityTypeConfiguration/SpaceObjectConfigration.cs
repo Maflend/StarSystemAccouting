@@ -24,7 +24,7 @@ namespace StarSystemAccouting.Persistence.EntityTypeConfiguration
             builder.Property(e => e.Diameter).IsRequired();
             builder.Property(e => e.Weight).IsRequired();
        
-            builder.Property(e => e.StarSystemName).IsRequired();
+            
 
 
 
