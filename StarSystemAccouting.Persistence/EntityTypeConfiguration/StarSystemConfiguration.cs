@@ -13,8 +13,9 @@ namespace StarSystemAccouting.Persistence.EntityTypeConfiguration
     {
         public void Configure(EntityTypeBuilder<StarSystem> builder)
         {
-            builder.HasKey(e => e.Name);
-            builder.HasIndex(e => e.Name);
+            builder.HasKey(e => e.Id);
+            builder.HasIndex(e => e.Id);
+            builder.HasIndex(e => e.Name).IsUnique();
 
             builder.Property(e => e.Name).IsRequired();
             builder.Property(e => e.Age).IsRequired();
