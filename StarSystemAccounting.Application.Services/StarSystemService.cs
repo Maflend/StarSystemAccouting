@@ -68,9 +68,27 @@ namespace StarSystemAccouting.Application.Services
             };
         }
 
-        public Task<ServiceResponse<StarSystemResponse>> DeleteAsync(string name)
+        public async Task<ServiceResponse<string>> DeleteAsync(string name)
         {
-            throw new NotImplementedException();
+            if(!_db.StarSystems.Any(s=>s.Name == name))
+            {
+                return new ServiceResponse<string>()
+                {
+                    Status = false,
+                    Message = "Звездная система с таким именем не существует",
+                    Data = name
+                };
+            }
+
+
+            _db.StarSystems.Remove(new StarSystem() { Name = name });
+            await _db.SaveChangesAsync(new CancellationToken());
+
+            return new ServiceResponse<string>()
+            {
+                Status = true,
+                Data = name
+            };
         }
 
         public Task<ServiceResponse<StarSystemResponse>> GetAllAsync()
@@ -83,7 +101,7 @@ namespace StarSystemAccouting.Application.Services
             throw new NotImplementedException();
         }
 
-        public Task<ServiceResponse<StarSystemResponse>> UpdateAsync(StarSystemRequest starSystem)
+        public Task<ServiceResponse<string>> UpdateAsync(StarSystemRequest starSystem)
         {
             throw new NotImplementedException();
         }

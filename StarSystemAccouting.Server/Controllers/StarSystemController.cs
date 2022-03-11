@@ -39,5 +39,23 @@ namespace StarSystemAccouting.Server.Controllers
             return Ok(response);
 
         }
+
+        [HttpDelete]
+        public async Task<ActionResult<string>> Delete(string name)
+        {
+            if(string.IsNullOrWhiteSpace(name))
+            {
+                return BadRequest("string is empty");
+            }
+
+            var response = await _starSystemService.DeleteAsync(name);
+
+            if(!response.Status)
+            {
+                return BadRequest(response.Message);
+            }
+
+            return Ok(response);
+        }
     }
 }
