@@ -11,7 +11,7 @@ using StarSystemAccouting.Persistence;
 namespace StarSystemAccouting.Persistence.Migrations
 {
     [DbContext(typeof(AppContext))]
-    [Migration("20220310122502_Initial")]
+    [Migration("20220310162439_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
