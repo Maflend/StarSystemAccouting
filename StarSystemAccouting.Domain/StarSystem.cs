@@ -8,6 +8,7 @@ namespace StarSystemAccouting.Domain
 {
     public class StarSystem
     {
+        public Guid Id { get; set; }
         public string Name { get; set; }
         public double Age { get; set; }
         public string CenterOfGravityName { get; set; }
