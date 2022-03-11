@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using StarSystemAccouting.Application;
 using StarSystemAccouting.Domain;
 using StarSystemAccouting.Persistence.EntityTypeConfiguration;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace StarSystemAccouting.Persistence
 {
-    public class AppContext : DbContext
+    public class AppContext : DbContext, IAppContext
     {
         public AppContext(DbContextOptions<AppContext> options) : base(options) { }
         public DbSet<SpaceObject> SpaceObjects { get; set; }

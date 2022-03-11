@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using StarSystemAccouting.Application;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,8 @@ namespace StarSystemAccouting.Persistence
         {
             services.AddDbContext<AppContext>(options =>
             options.UseNpgsql(configuration.GetConnectionString("PostgreConnection")));
-        
+
+            services.AddScoped<IAppContext>(provider => provider.GetService<AppContext>());
         }
     }
 }

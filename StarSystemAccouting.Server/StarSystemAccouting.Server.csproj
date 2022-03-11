@@ -15,6 +15,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\StarSystemAccounting.Application.Services.Abstractions\StarSystemAccouting.Application.Services.Abstractions.csproj" />
+    <ProjectReference Include="..\StarSystemAccounting.Application.Services\StarSystemAccouting.Application.Services.csproj" />
     <ProjectReference Include="..\StarSystemAccouting.Persistence\StarSystemAccouting.Persistence.csproj" />
   </ItemGroup>
 
