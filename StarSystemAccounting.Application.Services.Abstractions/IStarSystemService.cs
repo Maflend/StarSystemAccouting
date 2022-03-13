@@ -1,5 +1,5 @@
 ﻿using StarSystemAccouting.Application.DTOs;
-using StarSystemAccouting.Application.DTOs.Request;
+using StarSystemAccouting.Application.DTOs.Request.StarSystem;
 using StarSystemAccouting.Application.DTOs.Response;
 using System;
 using System.Collections.Generic;
@@ -14,8 +14,8 @@ namespace StarSystemAccouting.Application.Services.Abstractions
     {
         Task<ServiceResponse<StarSystemResponse>> GetAllAsync();
         Task<ServiceResponse<StarSystemResponse>> GetByNameAsync(string name);
-        Task<ServiceResponse<StarSystemResponse>> CreateAsync(StarSystemForCreateRequest starSystem);
-        Task<ServiceResponse<string>> UpdateAsync(StarSystemForUpdateRequest starSystem);
+        Task<ServiceResponse<StarSystemResponse>> CreateAsync(StarSystemCreateRequest starSystem);
+        Task<ServiceResponse<string>> UpdateAsync(StarSystemUpdateRequest starSystem);
         Task<ServiceResponse<string>> DeleteAsync(string name);
     }
 }

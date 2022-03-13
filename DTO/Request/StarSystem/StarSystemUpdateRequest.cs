@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StarSystemAccouting.Application.DTOs.Request
+namespace StarSystemAccouting.Application.DTOs.Request.StarSystem
 {
-    public class StarSystemForUpdateRequest
+    public class StarSystemUpdateRequest
     {
         public string Name { get; set; }
         public double Age { get; set; }

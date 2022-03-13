@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using StarSystemAccouting.Application.DTOs.Request;
+using StarSystemAccouting.Application.DTOs.Request.StarSystem;
 using StarSystemAccouting.Application.DTOs.Response;
 using StarSystemAccouting.Application.Services.Abstractions;
 using System.Net;
@@ -18,7 +19,7 @@ namespace StarSystemAccouting.Server.Controllers
             _starSystemService = starSystemService;
         }
         [HttpPost]
-        public async Task<ActionResult<StarSystemResponse>> Create(StarSystemForCreateRequest request)
+        public async Task<ActionResult<StarSystemResponse>> Create(StarSystemCreateRequest request)
         {
             //if(!ModelState.IsValid)
             //{
@@ -58,7 +59,7 @@ namespace StarSystemAccouting.Server.Controllers
             return Ok(response);
         }
         [HttpPost("/Update")]
-        public async Task<ActionResult<string>> Update(StarSystemForUpdateRequest request)
+        public async Task<ActionResult<string>> Update(StarSystemUpdateRequest request)
         {
             if(!ModelState.IsValid)
             {

@@ -5,12 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StarSystemAccouting.Application.DTOs.Request
+namespace StarSystemAccouting.Application.DTOs.Request.StarSystem
 {
-    public class StarSystemForCreateRequest
+    public class StarSystemCreateRequest
     {
         public string Name { get; set; }
         public double Age { get; set; }
-        public SpaceObjectRequest CenterOfGravity { get; set; }
+        public SpaceObjectForStarSystemCreateRequest CenterOfGravity { get; set; }
     }
 }

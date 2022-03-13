@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StarSystemAccouting.Application.DTOs;
-using StarSystemAccouting.Application.DTOs.Request;
+using StarSystemAccouting.Application.DTOs.Request.StarSystem;
 using StarSystemAccouting.Application.DTOs.Response;
 using StarSystemAccouting.Application.Services.Abstractions;
 using StarSystemAccouting.Domain;
@@ -21,7 +21,7 @@ namespace StarSystemAccouting.Application.Services
         {
             _db = db;
         }
-        public async Task<ServiceResponse<StarSystemResponse>> CreateAsync(StarSystemForCreateRequest request)
+        public async Task<ServiceResponse<StarSystemResponse>> CreateAsync(StarSystemCreateRequest request)
         {
             if (_db.StarSystems.Any(s => s.Name == request.Name))
             {
@@ -33,6 +33,12 @@ namespace StarSystemAccouting.Application.Services
                 };
             }
 
+            StarSystem entity = new()
+            {
+                Name = request.Name,
+                Age = request.Age,
+                CenterOfGravityName = request.CenterOfGravity.Name
+            };
             SpaceObject spaceObject = new()
             {
                 Name = request.CenterOfGravity.Name,
@@ -40,15 +46,9 @@ namespace StarSystemAccouting.Application.Services
                 Diameter = request.CenterOfGravity.Diameter,
                 Type = request.CenterOfGravity.Type,
                 Weight = request.CenterOfGravity.Weight,
-                StarSystemName = request.CenterOfGravity.StarSystemName
+                StarSystemId = entity.Id
             };
 
-            StarSystem entity = new()
-            {
-                Name = request.Name,
-                Age = request.Age,
-                CenterOfGravityName = request.CenterOfGravity.Name,
-            };
 
             await _db.StarSystems.AddAsync(entity);
             await _db.SpaceObjects.AddAsync(spaceObject);
@@ -102,7 +102,7 @@ namespace StarSystemAccouting.Application.Services
             throw new NotImplementedException();
         }
 
-        public async Task<ServiceResponse<string>> UpdateAsync(StarSystemForUpdateRequest starSystem)
+        public async Task<ServiceResponse<string>> UpdateAsync(StarSystemUpdateRequest starSystem)
         {
             if(!_db.StarSystems.Any(s=>s.Name == starSystem.Name))
             {

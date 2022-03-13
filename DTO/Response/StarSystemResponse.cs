@@ -12,6 +12,5 @@ namespace StarSystemAccouting.Application.DTOs.Response
         public string Name { get; set; }
         public double Age { get; set; }
         public string CenterOfGravityName { get; set; }
-        public List<SpaceObjectResponse> SpaceObjects { get; set; }
     }
 }
