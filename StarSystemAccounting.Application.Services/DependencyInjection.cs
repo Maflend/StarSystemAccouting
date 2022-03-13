@@ -13,6 +13,7 @@ namespace StarSystemAccouting.Application.Services
         public static void AddServices(this IServiceCollection services)
         {
             services.AddScoped<IStarSystemService, StarSystemService>();
+            services.AddScoped<ISpaceObjectService, SpaceObjectService>();
         }
     }
 }

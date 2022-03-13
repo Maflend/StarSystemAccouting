@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StarSystemAccouting.Application.DTOs;
+using StarSystemAccouting.Application.DTOs.Request.SpaceObject;
 using StarSystemAccouting.Application.DTOs.Request.StarSystem;
 using StarSystemAccouting.Application.DTOs.Response;
 using StarSystemAccouting.Application.Services.Abstractions;
@@ -16,57 +17,106 @@ namespace StarSystemAccouting.Application.Services
     public class StarSystemService : IStarSystemService
     {
         private readonly ApplicationContext _db;
+        private readonly ISpaceObjectService _spaceObjectService;
 
-        public StarSystemService(ApplicationContext db)
+        public StarSystemService(ApplicationContext db, ISpaceObjectService spaceObjectService)
         {
             _db = db;
+            _spaceObjectService = spaceObjectService;
         }
-        public async Task<ServiceResponse<StarSystemResponse>> CreateAsync(StarSystemCreateRequest request)
+
+        public async Task<ServiceResponse<Guid>> SetCenterOfGravity(Guid starSystemId, Guid spaceObjectId)
+        {
+            var starSystemEntity = await _db.StarSystems.FirstAsync(s => s.Id == starSystemId);
+            if (starSystemEntity == null)
+                return new ServiceResponse<Guid>
+                {
+                    Status = false,
+                    Message = "Звездная система не существует",
+                    Data = new()
+                };
+
+
+
+            var spaceObject = await _db.SpaceObjects.FirstAsync(sobj => sobj.Id == spaceObjectId);
+
+            if (spaceObject == null)
+                return new ServiceResponse<Guid>
+                {
+                    Status = false,
+                    Message = "Космический обьект не существует",
+                    Data = new()
+                };
+
+            if (spaceObject.Type != "Звезда" )
+                return new ServiceResponse<Guid>
+                {
+                    Status = false,
+                    Message = "Космический обьект не существует",
+                    Data = new()    // подумать че вернуть
+                };
+
+
+            starSystemEntity.CenterOfGravityId = spaceObjectId;
+            return new ServiceResponse<Guid>
+            {
+                Status = true,
+                
+                Data = new()
+            };
+        }
+
+        public async Task<ServiceResponse<Guid>> CreateAsync(StarSystemCreateRequest request)
         {
             if (_db.StarSystems.Any(s => s.Name == request.Name))
             {
-                return new ServiceResponse<StarSystemResponse>()
+                return new ServiceResponse<Guid>()
                 {
                     Status = false,
                     Message = "Звездная система с таким именем уже существует",
-                    Data = new(),
+                    Data = Guid.Empty,
                 };
             }
 
             StarSystem entity = new()
             {
                 Name = request.Name,
-                Age = request.Age
+                Age = request.Age,
             };
-            SpaceObject spaceObject = new()
-            {
-                Name = request.CenterOfGravity.Name,
-                Age = request.CenterOfGravity.Age,
-                Diameter = request.CenterOfGravity.Diameter,
-                Type = request.CenterOfGravity.Type,
-                Weight = request.CenterOfGravity.Weight,
-                StarSystemId = entity.Id
-            };
-
 
             await _db.StarSystems.AddAsync(entity);
-            await _db.SpaceObjects.AddAsync(spaceObject);
+            await _db.SaveChangesAsync();
 
-            entity.CenterOfGravityId = spaceObject.Id;
-            await _db.SaveChangesAsync(new CancellationToken());
 
-            StarSystemResponse response = new()
+            SpaceObjectCreateRequest spaceObjectCreateRequest = new()
             {
-                Name = entity.Name,
-                Age = entity.Age,
-                CenterOfGravityName = spaceObject.Name
+                Name = request.CenterOfGravityName,
+                Age = request.CenterOfGravityAge,
+                Type = request.CenterOfGravityType,
+                Diameter = request.CenterOfGravityDiameter,
+                Weight = request.CenterOfGravityWeight
             };
 
+            var spaceObjectServiceResponse = await _spaceObjectService.CreateAsync(spaceObjectCreateRequest);
 
-            return new ServiceResponse<StarSystemResponse>()
+            var s = await SetCenterOfGravity(entity.Id, spaceObjectServiceResponse.Data);
+            if (!s.Status)
+            {
+                return new ServiceResponse<Guid>()
+                {
+                    Status = false,
+                    Message = s.Message,
+                    Data = Guid.Empty,
+                };
+            }
+
+
+
+
+            return new ServiceResponse<Guid>()
             {
                 Status = true,
-                Data = response
+                Data = entity.Id
             };
         }
 

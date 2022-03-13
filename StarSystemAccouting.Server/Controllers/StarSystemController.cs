@@ -21,21 +21,17 @@ namespace StarSystemAccouting.Server.Controllers
         [HttpPost]
         public async Task<ActionResult<StarSystemResponse>> Create(StarSystemCreateRequest request)
         {
-            //if(!ModelState.IsValid)
-            //{
-            //    return BadRequest(ModelState);
-            //}
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-            //var response = await _starSystemService.CreateAsync(request);
-
-            //if(!response.Status)
-            //{
-            //    return BadRequest(response.Message);
-            //}
-            //return Ok(response);
-
-         
             var response = await _starSystemService.CreateAsync(request);
+
+            if (!response.Status)
+            {
+                return BadRequest(response.Message);
+            }
 
             return Ok(response);
 
