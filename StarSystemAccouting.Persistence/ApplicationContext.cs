@@ -19,6 +19,7 @@ namespace StarSystemAccouting.Persistence
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options) { }
         public DbSet<SpaceObject> SpaceObjects { get; set; }
         public DbSet<StarSystem> StarSystems { get; set; }
+        public DbSet<ObjectType> ObjectType { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using StarSystemAccouting.Application.DTOs.Request;
+using StarSystemAccouting.Application.DTOs.Request.SpaceObject;
 using StarSystemAccouting.Application.DTOs.Request.StarSystem;
 using StarSystemAccouting.Application.DTOs.Response;
 using StarSystemAccouting.Application.Services.Abstractions;
@@ -13,10 +14,14 @@ namespace StarSystemAccouting.Server.Controllers
     public class StarSystemController : ControllerBase
     {
         private readonly IStarSystemService _starSystemService;
+        private readonly ISpaceObjectService _spaceObjectService;
+        private readonly ICenterOfGravityService _centerOfGravityService;
 
-        public StarSystemController(IStarSystemService starSystemService)
+        public StarSystemController(IStarSystemService starSystemService, ISpaceObjectService spaceObjectService, ICenterOfGravityService centerOfGravityService)
         {
             _starSystemService = starSystemService;
+            _spaceObjectService = spaceObjectService;
+            _centerOfGravityService = centerOfGravityService;
         }
         [HttpPost]
         public async Task<ActionResult<StarSystemResponse>> Create(StarSystemCreateRequest request)
@@ -26,14 +31,44 @@ namespace StarSystemAccouting.Server.Controllers
                 return BadRequest(ModelState);
             }
 
-            var response = await _starSystemService.CreateAsync(request);
 
-            if (!response.Status)
+
+
+            var starSystemServiceResponse = await _starSystemService.CreateAsync(request);
+            if (!starSystemServiceResponse.Status)
             {
-                return BadRequest(response.Message);
+                return BadRequest(starSystemServiceResponse.Message);
             }
 
-            return Ok(response);
+
+
+            //SpaceObjectCreateRequest spaceObjectCreateRequest = new()
+            //{
+            //    Name = request.CenterOfGravityName,
+            //    Age = request.CenterOfGravityAge,
+            //    Type = request.CenterOfGravityType,
+            //    Diameter = request.CenterOfGravityDiameter,
+            //    Weight = request.CenterOfGravityWeight,
+            //    StarSystemId = starSystemServiceResponse.Data
+
+            //};
+
+            //var spaceObjectServiceResponse = await _spaceObjectService.CreateAsync(spaceObjectCreateRequest);
+            //if (!spaceObjectServiceResponse.Status)
+            //{
+            //    return BadRequest(spaceObjectServiceResponse.Message);
+            //}
+
+
+            //var centerOfGravityServiceResponse = await _centerOfGravityService.SetAsync(starSystemServiceResponse.Data, spaceObjectServiceResponse.Data);
+            //if (!centerOfGravityServiceResponse.Status)
+            //{
+            //    return BadRequest(centerOfGravityServiceResponse.Message);
+            //}
+
+
+
+            return Ok(starSystemServiceResponse);
 
         }
 

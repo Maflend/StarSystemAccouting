@@ -14,6 +14,7 @@ namespace StarSystemAccouting.Application.Services
         {
             services.AddScoped<IStarSystemService, StarSystemService>();
             services.AddScoped<ISpaceObjectService, SpaceObjectService>();
+            services.AddScoped<ICenterOfGravityService, CenterOfGravityService>();
         }
     }
 }

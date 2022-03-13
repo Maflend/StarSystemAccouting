@@ -18,53 +18,16 @@ namespace StarSystemAccouting.Application.Services
     {
         private readonly ApplicationContext _db;
         private readonly ISpaceObjectService _spaceObjectService;
+        private readonly ICenterOfGravityService _centerOfGravityService;
 
-        public StarSystemService(ApplicationContext db, ISpaceObjectService spaceObjectService)
+        public StarSystemService(ApplicationContext db, ISpaceObjectService spaceObjectService, ICenterOfGravityService centerOfGravityService)
         {
             _db = db;
             _spaceObjectService = spaceObjectService;
+            _centerOfGravityService = centerOfGravityService;
         }
 
-        public async Task<ServiceResponse<Guid>> SetCenterOfGravity(Guid starSystemId, Guid spaceObjectId)
-        {
-            var starSystemEntity = await _db.StarSystems.FirstAsync(s => s.Id == starSystemId);
-            if (starSystemEntity == null)
-                return new ServiceResponse<Guid>
-                {
-                    Status = false,
-                    Message = "Звездная система не существует",
-                    Data = new()
-                };
-
-
-
-            var spaceObject = await _db.SpaceObjects.FirstAsync(sobj => sobj.Id == spaceObjectId);
-
-            if (spaceObject == null)
-                return new ServiceResponse<Guid>
-                {
-                    Status = false,
-                    Message = "Космический обьект не существует",
-                    Data = new()
-                };
-
-            //if (spaceObject.Type != "Звезда" )
-            //    return new ServiceResponse<Guid>
-            //    {
-            //        Status = false,
-            //        Message = "Космический обьект не существует",
-            //        Data = new()    // подумать че вернуть
-            //    };
-
-
-            starSystemEntity.CenterOfGravityId = spaceObjectId;
-            return new ServiceResponse<Guid>
-            {
-                Status = true,
-                
-                Data = new()
-            };
-        }
+      
 
         public async Task<ServiceResponse<Guid>> CreateAsync(StarSystemCreateRequest request)
         {
@@ -85,7 +48,10 @@ namespace StarSystemAccouting.Application.Services
             };
 
             await _db.StarSystems.AddAsync(entity);
+
             await _db.SaveChangesAsync();
+
+
 
 
             SpaceObjectCreateRequest spaceObjectCreateRequest = new()
@@ -94,23 +60,41 @@ namespace StarSystemAccouting.Application.Services
                 Age = request.CenterOfGravityAge,
                 Type = request.CenterOfGravityType,
                 Diameter = request.CenterOfGravityDiameter,
-                Weight = request.CenterOfGravityWeight
+                Weight = request.CenterOfGravityWeight,
+                StarSystemId = entity.Id
+
             };
 
             var spaceObjectServiceResponse = await _spaceObjectService.CreateAsync(spaceObjectCreateRequest);
-
-            var s = await SetCenterOfGravity(entity.Id, spaceObjectServiceResponse.Data);
-            if (!s.Status)
+            if (!spaceObjectServiceResponse.Status)
             {
+                _db.StarSystems.Remove(entity);
+                await _db.SaveChangesAsync();
                 return new ServiceResponse<Guid>()
                 {
                     Status = false,
-                    Message = s.Message,
+                    Message = spaceObjectServiceResponse.Message,
                     Data = Guid.Empty,
                 };
             }
 
 
+            var centerOfGravityServiceResponse = await _centerOfGravityService.SetAsync(entity.Id, spaceObjectServiceResponse.Data);
+            if (!centerOfGravityServiceResponse.Status)
+            {
+                _db.StarSystems.Remove(entity);
+                _db.SpaceObjects.Remove(_db.SpaceObjects.First(sobj=>sobj.Id == spaceObjectServiceResponse.Data));
+                await _db.SaveChangesAsync();
+                return new ServiceResponse<Guid>()
+                {
+                    Status = false,
+                    Message = centerOfGravityServiceResponse.Message,
+                    Data = Guid.Empty,
+                };
+            }
+
+            entity.CenterOfGravityId = spaceObjectServiceResponse.Data;
+            await _db.SaveChangesAsync();
 
 
             return new ServiceResponse<Guid>()
