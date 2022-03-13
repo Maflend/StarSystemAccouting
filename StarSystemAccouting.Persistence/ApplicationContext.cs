@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using StarSystemAccouting.Application;
+
 using StarSystemAccouting.Domain;
 using StarSystemAccouting.Persistence.EntityTypeConfiguration;
 using System;
@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace StarSystemAccouting.Persistence
 {
-    public class ApplicationContext : DbContext, IAppContext
+    public class ApplicationContext : DbContext
     {
         public ApplicationContext()
         {

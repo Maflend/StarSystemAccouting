@@ -19,7 +19,7 @@ namespace StarSystemAccouting.Persistence.EntityTypeConfiguration
 
             builder.Property(e => e.Name).IsRequired();
             builder.Property(e => e.Age).IsRequired();
-            builder.Property(e => e.CenterOfGravityName).IsRequired();
+            builder.Property(e => e.CenterOfGravityId).IsRequired();
 
 
             builder.HasMany(e => e.SpaceObjects).WithOne(s => s.StarSystem).HasForeignKey(e => e.StarSystemId);

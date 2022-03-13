@@ -11,7 +11,7 @@ namespace StarSystemAccouting.Domain
         public Guid Id { get; set; } = Guid.NewGuid();
         public string Name { get; set; }
         public double Age { get; set; }
-        public string CenterOfGravityName { get; set; }
+        public Guid CenterOfGravityId { get; set; }
         public List<SpaceObject> SpaceObjects { get; set; }
     }
 }

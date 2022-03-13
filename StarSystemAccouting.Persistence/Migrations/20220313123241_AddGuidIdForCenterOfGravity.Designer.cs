@@ -12,8 +12,8 @@ using StarSystemAccouting.Persistence;
 namespace StarSystemAccouting.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20220311154803_AddGuidKey")]
-    partial class AddGuidKey
+    [Migration("20220313123241_AddGuidIdForCenterOfGravity")]
+    partial class AddGuidIdForCenterOfGravity
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -71,9 +71,8 @@ namespace StarSystemAccouting.Persistence.Migrations
                     b.Property<double>("Age")
                         .HasColumnType("double precision");
 
-                    b.Property<string>("CenterOfGravityName")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<Guid>("CenterOfGravityId")
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Name")
                         .IsRequired()

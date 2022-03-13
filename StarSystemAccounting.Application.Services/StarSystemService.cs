@@ -36,8 +36,7 @@ namespace StarSystemAccouting.Application.Services
             StarSystem entity = new()
             {
                 Name = request.Name,
-                Age = request.Age,
-                CenterOfGravityName = request.CenterOfGravity.Name
+                Age = request.Age
             };
             SpaceObject spaceObject = new()
             {
@@ -52,13 +51,15 @@ namespace StarSystemAccouting.Application.Services
 
             await _db.StarSystems.AddAsync(entity);
             await _db.SpaceObjects.AddAsync(spaceObject);
+
+            entity.CenterOfGravityId = spaceObject.Id;
             await _db.SaveChangesAsync(new CancellationToken());
 
             StarSystemResponse response = new()
             {
                 Name = entity.Name,
                 Age = entity.Age,
-                CenterOfGravityName = entity.CenterOfGravityName
+                CenterOfGravityName = spaceObject.Name
             };
 
 
@@ -114,20 +115,19 @@ namespace StarSystemAccouting.Application.Services
                 };
             }
 
-            var entity = _db.StarSystems.First(s=>s.Name == starSystem.Name);
+            var StarSystemEntity = _db.StarSystems.First(s=>s.Name == starSystem.Name);
 
-            _db.Entry(entity).Collection(s => s.SpaceObjects).Query().Where(sobj => sobj.Name == entity.CenterOfGravityName).Load();
+            _db.Entry(StarSystemEntity).Collection(s => s.SpaceObjects).Query().Where(sobj => sobj.Id == StarSystemEntity.CenterOfGravityId).Load();
 
-            entity.Name = starSystem.Name;
-            entity.Age = starSystem.Age;
-            entity.CenterOfGravityName = starSystem.CenterOfGravity;
-            entity.SpaceObjects.First().Name = starSystem.CenterOfGravity;
+            StarSystemEntity.Name = starSystem.Name;
+            StarSystemEntity.Age = starSystem.Age;
+
             await _db.SaveChangesAsync(new CancellationToken());
 
             return new ServiceResponse<string>()
             {
                 Status = true,
-                Data = entity.Name
+                Data = StarSystemEntity.Name
             };
         }
     }
