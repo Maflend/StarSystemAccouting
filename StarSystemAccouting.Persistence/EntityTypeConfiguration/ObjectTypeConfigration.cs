@@ -9,14 +9,14 @@ using System.Threading.Tasks;
 
 namespace StarSystemAccouting.Persistence.EntityTypeConfiguration
 {
-    public class SpaceObjectTypeConfigration : IEntityTypeConfiguration<SpaceObjectType>
+    public class ObjectTypeConfigration : IEntityTypeConfiguration<ObjectType>
     {
-        public void Configure(EntityTypeBuilder<SpaceObjectType> builder)
+        public void Configure(EntityTypeBuilder<ObjectType> builder)
         {
-            builder.HasKey(e => e.Id);
+            builder.HasKey(e => e.Name);
             builder.HasIndex(e => e.Name).IsUnique();
 
-            builder.HasMany(e => e.SpaceObjects).WithOne(sobj => sobj.Type).HasForeignKey(sobj => sobj.TypeId);
+            builder.HasMany(e => e.SpaceObjects).WithOne(sobj => sobj.ObjectType).HasForeignKey(sobj => sobj.Type);
         }
     }
 }

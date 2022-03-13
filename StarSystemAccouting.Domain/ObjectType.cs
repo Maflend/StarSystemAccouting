@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 
 namespace StarSystemAccouting.Domain
 {
-    public class SpaceObjectType
+    public class ObjectType
     {
-        public Guid Id { get; set; }
         public string Name { get; set; }
-
         public List<SpaceObject> SpaceObjects { get; set; }
     }
 }
