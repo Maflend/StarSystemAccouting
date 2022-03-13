@@ -48,13 +48,13 @@ namespace StarSystemAccouting.Application.Services
                     Data = new()
                 };
 
-            if (spaceObject.Type != "Звезда" )
-                return new ServiceResponse<Guid>
-                {
-                    Status = false,
-                    Message = "Космический обьект не существует",
-                    Data = new()    // подумать че вернуть
-                };
+            //if (spaceObject.Type != "Звезда" )
+            //    return new ServiceResponse<Guid>
+            //    {
+            //        Status = false,
+            //        Message = "Космический обьект не существует",
+            //        Data = new()    // подумать че вернуть
+            //    };
 
 
             starSystemEntity.CenterOfGravityId = spaceObjectId;

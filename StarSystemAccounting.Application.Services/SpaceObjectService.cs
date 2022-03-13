@@ -36,7 +36,7 @@ namespace StarSystemAccouting.Application.Services
                 Name = request.Name,
                 Age = request.Age,
                 Diameter = request.Diameter,
-                Type = request.Type,
+               // Type = request.Type,
                 Weight = request.Weight,
                 StarSystemId = _db.StarSystems.FirstOrDefault(s=>s.Name == request.StarSystemName).Id
             };

@@ -24,6 +24,7 @@ namespace StarSystemAccouting.Persistence
         {
             modelBuilder.ApplyConfiguration(new SpaceObjectConfigration());
             modelBuilder.ApplyConfiguration(new StarSystemConfiguration());
+            modelBuilder.ApplyConfiguration(new SpaceObjectTypeConfigration());
         }
     }
 }

@@ -10,10 +10,12 @@ namespace StarSystemAccouting.Domain
     {
         public Guid Id { get; set; } = Guid.NewGuid();
         public string Name { get; set; }
-        public string Type { get; set; }
         public double Age { get; set; }
         public double Diameter { get; set; }
         public double Weight { get; set; }
+
+        public Guid TypeId { get; set; }
+        public SpaceObjectType Type { get; set; }
         public Guid StarSystemId { get; set; }
         public StarSystem StarSystem { get; set; }
     }
