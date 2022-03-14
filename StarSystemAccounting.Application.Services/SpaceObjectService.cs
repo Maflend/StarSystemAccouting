@@ -49,16 +49,22 @@ namespace StarSystemAccouting.Application.Services
                 Diameter = request.Diameter,
                 Type = request.Type,
                 Weight = request.Weight
+                
             };
 
-    
-            await _db.SpaceObjects.AddAsync(spaceObject);
+            var starSystem = await _db.StarSystems.FirstOrDefaultAsync(s => s.Id == request.StarSystemId);
+            if (starSystem == null)
+                return new ServiceResponse<Guid>()
+                {
+                    Status = false,
+                    Message = "Не удалось найти звездную систему",
+                    Data = Guid.Empty
+                };
 
-            var starSystem = await _db.StarSystems.FirstAsync(s => s.Id == request.StarSystemId);
             spaceObject.StarSystemId = starSystem.Id;
 
-
-
+           
+            await _db.SpaceObjects.AddAsync(spaceObject);
             try
             {
                 await _db.SaveChangesAsync();

@@ -13,6 +13,6 @@ namespace StarSystemAccouting.Application.DTOs.Request.SpaceObject
         public double Age { get; set; }
         public double Diameter { get; set; }
         public double Weight { get; set; }
-        public Guid StarSystemId { get; set; }
+        public Guid StarSystemId { get; set; } = Guid.Empty;
     }
 }
