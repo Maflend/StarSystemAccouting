@@ -23,6 +23,29 @@ namespace StarSystemAccouting.Application.Services
         }
 
 
+        public async Task<ServiceResponse<List<SpaceObjectResponse>>> GetAll()
+        {
+            var spaceObjectEntities = await _db.SpaceObjects
+                .Select(sobj => new SpaceObjectResponse {
+                Id = sobj.Id,
+                Age = sobj.Age,
+                Diameter = sobj.Diameter,
+                Name = sobj.Name,
+                Type = sobj.Type,
+                Weight = sobj.Weight,
+                StarSystemId = sobj.StarSystemId})
+                .ToListAsync();
+
+            return new ServiceResponse<List<SpaceObjectResponse>>()
+            {
+                Status = true,
+                Data = spaceObjectEntities
+            };
+
+        }
+
+
+
         public async Task<ServiceResponse<SpaceObjectResponse>> GetById(Guid id)
         {
             var spaceObjectEntity = await _db.SpaceObjects.FirstOrDefaultAsync(sobj => sobj.Id == id);
@@ -118,6 +141,6 @@ namespace StarSystemAccouting.Application.Services
             };
         }
 
-     
+      
     }
 }

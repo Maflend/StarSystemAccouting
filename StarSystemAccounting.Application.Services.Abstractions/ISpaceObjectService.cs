@@ -13,5 +13,6 @@ namespace StarSystemAccouting.Application.Services.Abstractions
     {
         Task<ServiceResponse<Guid>> CreateAsync(SpaceObjectCreateRequest spaceObject);
         Task<ServiceResponse<SpaceObjectResponse>> GetById(Guid id);
+        Task<ServiceResponse<List<SpaceObjectResponse>>> GetAll();
     }
 }
