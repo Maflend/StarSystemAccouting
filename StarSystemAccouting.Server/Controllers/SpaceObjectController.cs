@@ -37,6 +37,16 @@ namespace StarSystemAccouting.Server.Controllers
             return Ok(spaceObjectServiceResponse.Data);
         }
 
+        [HttpGet("GetAllByStarSystemId")]
+        public async Task<ActionResult<List<SpaceObjectResponse>>> GetAllByStarSystemId(Guid StarSystemId)
+        {
+            var spaceObjectServiceResponse = await _spaceObjectService.GetAllByStarSystemId(StarSystemId);
+            if (!spaceObjectServiceResponse.Status)
+                return BadRequest(spaceObjectServiceResponse.Message);
+
+            return Ok(spaceObjectServiceResponse.Data);
+        }
+
         [HttpPost("Create")]
         public async Task<ActionResult<Guid>> Create(SpaceObjectCreateRequest request)
         {
