@@ -184,31 +184,42 @@ namespace StarSystemAccouting.Application.Services
 
         }
 
-        public async Task<ServiceResponse<string>> UpdateAsync(StarSystemUpdateRequest starSystem)
+        public async Task<ServiceResponse<Guid>> UpdateAsync(StarSystemUpdateRequest starSystem)
         {
-            if(!_db.StarSystems.Any(s=>s.Name == starSystem.Name))
+
+            if (!_db.StarSystems.Any(s => s.Id == starSystem.Id))
             {
-                return new ServiceResponse<string>()
+                return new ServiceResponse<Guid>()
                 {
                     Status = false,
-                    Message = "Звездная система с таким именем не существует",
-                    Data = starSystem.Name
+                    Message = "Звездная система для изменений не найдена",
+                    Data = starSystem.Id
                 };
             }
 
-            var StarSystemEntity = _db.StarSystems.First(s=>s.Name == starSystem.Name);
+            if (_db.StarSystems.Any(s=>s.Name == starSystem.Name))
+            {
+                return new ServiceResponse<Guid>()
+                {
+                    Status = false,
+                    Message = "Звездная система с таким именем уже существует",
+                    Data = starSystem.Id
+                };
+            }
 
-            _db.Entry(StarSystemEntity).Collection(s => s.SpaceObjects).Query().Where(sobj => sobj.Id == StarSystemEntity.CenterOfGravityId).Load();
+
+
+            var StarSystemEntity = _db.StarSystems.First(s=>s.Id == starSystem.Id);
 
             StarSystemEntity.Name = starSystem.Name;
             StarSystemEntity.Age = starSystem.Age;
 
-            await _db.SaveChangesAsync(new CancellationToken());
+            await _db.SaveChangesAsync();
 
-            return new ServiceResponse<string>()
+            return new ServiceResponse<Guid>()
             {
                 Status = true,
-                Data = StarSystemEntity.Name
+                Data = StarSystemEntity.Id
             };
         }
     }

@@ -85,7 +85,7 @@ namespace StarSystemAccouting.Server.Controllers
             return Ok(response);
         }
         [HttpPost("/Update")]
-        public async Task<ActionResult<string>> Update(StarSystemUpdateRequest request)
+        public async Task<ActionResult<Guid>> Update(StarSystemUpdateRequest request)
         {
             if(!ModelState.IsValid)
             {
@@ -98,7 +98,7 @@ namespace StarSystemAccouting.Server.Controllers
                 return BadRequest(response.Message);
             }
 
-            return Ok(response);
+            return Ok(response.Data);
         }
     }
 }

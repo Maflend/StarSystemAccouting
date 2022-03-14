@@ -8,8 +8,8 @@ namespace StarSystemAccouting.Application.DTOs.Request.StarSystem
 {
     public class StarSystemUpdateRequest
     {
+        public Guid Id { get; set; }
         public string Name { get; set; }
         public double Age { get; set; }
-        public string CenterOfGravity { get; set; }
     }
 }
