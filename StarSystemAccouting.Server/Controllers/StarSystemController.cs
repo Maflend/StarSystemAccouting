@@ -24,7 +24,7 @@ namespace StarSystemAccouting.Server.Controllers
             _centerOfGravityService = centerOfGravityService;
         }
 
-        [HttpGet("/GetById")]
+        [HttpGet("GetById")]
         public async Task<ActionResult<StarSystemResponse>> GetById(Guid id)
         {
             var starSystemServiceResponse = await _starSystemService.GetByIdAsync(id);
@@ -36,7 +36,7 @@ namespace StarSystemAccouting.Server.Controllers
         }
 
 
-        [HttpGet("/GetAll")]
+        [HttpGet("GetAll")]
         public async Task<ActionResult<StarSystemResponse>> GetAll()
         {
             var starSystemServiceResponse = await _starSystemService.GetAllAsync();
@@ -49,7 +49,7 @@ namespace StarSystemAccouting.Server.Controllers
 
 
 
-        [HttpPost("/Create")]
+        [HttpPost("Create")]
         public async Task<ActionResult<Guid>> Create(StarSystemCreateRequest request)
         {
             if (!ModelState.IsValid)
@@ -67,7 +67,7 @@ namespace StarSystemAccouting.Server.Controllers
 
         }
 
-        [HttpDelete("/Delete")]
+        [HttpDelete("Delete")]
         public async Task<ActionResult<string>> Delete(Guid id)
         {
             var response = await _starSystemService.DeleteAsync(id);
@@ -79,7 +79,7 @@ namespace StarSystemAccouting.Server.Controllers
 
             return Ok(response.Data);
         }
-        [HttpPost("/Update")]
+        [HttpPost("Update")]
         public async Task<ActionResult<Guid>> Update(StarSystemUpdateRequest request)
         {
             if(!ModelState.IsValid)

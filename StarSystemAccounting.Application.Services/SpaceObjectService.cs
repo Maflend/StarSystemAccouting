@@ -21,6 +21,39 @@ namespace StarSystemAccouting.Application.Services
         {
             _db = db;
         }
+
+
+        public async Task<ServiceResponse<SpaceObjectResponse>> GetById(Guid id)
+        {
+            var spaceObjectEntity = await _db.SpaceObjects.FirstOrDefaultAsync(sobj => sobj.Id == id);
+            if (spaceObjectEntity == null)
+                return new ServiceResponse<SpaceObjectResponse>()
+                {
+                    Status = false,
+                    Message = "Космический обьект не найден",
+                    Data = new()
+                };
+
+
+            SpaceObjectResponse response = new()
+            {
+                Id = spaceObjectEntity.Id,
+                Name = spaceObjectEntity.Name,
+                Age = spaceObjectEntity.Age,
+                Diameter = spaceObjectEntity.Diameter,
+                Type = spaceObjectEntity.Type,
+                Weight = spaceObjectEntity.Weight,
+                StarSystemId = spaceObjectEntity.StarSystemId
+            };
+
+
+            return new ServiceResponse<SpaceObjectResponse>()
+            {
+                Status = true,
+                Data = response
+            };
+        }
+
         public async Task<ServiceResponse<Guid>> CreateAsync(SpaceObjectCreateRequest request)
         {
             
@@ -84,5 +117,7 @@ namespace StarSystemAccouting.Application.Services
                 Data = spaceObject.Id
             };
         }
+
+     
     }
 }

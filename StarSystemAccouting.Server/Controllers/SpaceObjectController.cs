@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using StarSystemAccouting.Application.DTOs.Request.SpaceObject;
+using StarSystemAccouting.Application.DTOs.Response;
 using StarSystemAccouting.Application.Services.Abstractions;
 
 namespace StarSystemAccouting.Server.Controllers
@@ -16,7 +17,17 @@ namespace StarSystemAccouting.Server.Controllers
             _spaceObjectService = spaceObjectService;
         }
 
-        [HttpPost]
+        [HttpGet("GetById")]
+        public async Task<ActionResult<SpaceObjectResponse>> GetById(Guid id)
+        {
+            var spaceObjectServiceResponse = await _spaceObjectService.GetById(id);
+            if (!spaceObjectServiceResponse.Status)
+                return BadRequest(spaceObjectServiceResponse.Message);
+
+            return Ok(spaceObjectServiceResponse.Data);
+        }
+
+        [HttpPost("Create")]
         public async Task<ActionResult<Guid>> Create(SpaceObjectCreateRequest request)
         {
             var spaceObjectServiceResponse = await _spaceObjectService.CreateAsync(request);
@@ -25,5 +36,6 @@ namespace StarSystemAccouting.Server.Controllers
 
             return Ok(spaceObjectServiceResponse.Data);
         }
+        
     }
 }
