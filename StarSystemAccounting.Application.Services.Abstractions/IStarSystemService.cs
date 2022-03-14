@@ -12,7 +12,7 @@ namespace StarSystemAccouting.Application.Services.Abstractions
 {
     public interface IStarSystemService
     {
-        Task<ServiceResponse<StarSystemResponse>> GetAllAsync();
+        Task<ServiceResponse<List<StarSystemResponse>>> GetAllAsync();
         Task<ServiceResponse<StarSystemResponse>> GetByIdAsync(Guid id);
         Task<ServiceResponse<Guid>> CreateAsync(StarSystemCreateRequest starSystem);
         Task<ServiceResponse<string>> UpdateAsync(StarSystemUpdateRequest starSystem);

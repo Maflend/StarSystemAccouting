@@ -127,9 +127,27 @@ namespace StarSystemAccouting.Application.Services
             };
         }
 
-        public Task<ServiceResponse<StarSystemResponse>> GetAllAsync()
+        public async Task<ServiceResponse<List<StarSystemResponse>>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            var starSystemEntity = await _db.StarSystems
+                .Include(starsyst=>starsyst.SpaceObjects.Where(sobj=>sobj.Id == starsyst.CenterOfGravityId))
+                .Select(res=>new StarSystemResponse { Id = res.Id, Age = res.Age, Name = res.Name, CenterOfGravityName = res.SpaceObjects.First().Name }).ToListAsync();
+
+            if(starSystemEntity == null)
+                return new ServiceResponse<List<StarSystemResponse>>()
+                {
+                    Status = true,
+                    Data = new()
+                };
+
+            return new ServiceResponse<List<StarSystemResponse>>()
+            {
+                Status = true,
+                Data = starSystemEntity
+            };
+
+
+
         }
 
         public async Task<ServiceResponse<StarSystemResponse>> GetByIdAsync(Guid id)

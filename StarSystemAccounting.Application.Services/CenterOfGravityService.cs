@@ -41,7 +41,7 @@ namespace StarSystemAccouting.Application.Services
                     Data = new()
                 };
 
-            if (spaceObject.Type != "Звезда")
+            if (spaceObject.Type != "Звезда" && spaceObject.Type != "Черная дыра")
                 return new ServiceResponse<Guid>
                 {
                     Status = false,

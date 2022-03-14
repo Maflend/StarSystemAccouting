@@ -36,6 +36,18 @@ namespace StarSystemAccouting.Server.Controllers
         }
 
 
+        [HttpGet("/GetAll")]
+        public async Task<ActionResult<StarSystemResponse>> GetAll()
+        {
+            var starSystemServiceResponse = await _starSystemService.GetAllAsync();
+
+            if (!starSystemServiceResponse.Status)
+                return BadRequest(starSystemServiceResponse.Message);
+
+            return Ok(starSystemServiceResponse.Data);
+        }
+
+
 
         [HttpPost("/Create")]
         public async Task<ActionResult<Guid>> Create(StarSystemCreateRequest request)
@@ -45,20 +57,11 @@ namespace StarSystemAccouting.Server.Controllers
                 return BadRequest(ModelState);
             }
 
-
-
-
             var starSystemServiceResponse = await _starSystemService.CreateAsync(request);
             if (!starSystemServiceResponse.Status)
             {
                 return BadRequest(starSystemServiceResponse.Message);
             }
-
-
-
-        
-
-
 
             return Ok(starSystemServiceResponse.Data);
 
