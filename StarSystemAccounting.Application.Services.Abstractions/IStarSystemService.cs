@@ -16,6 +16,6 @@ namespace StarSystemAccouting.Application.Services.Abstractions
         Task<ServiceResponse<StarSystemResponse>> GetByIdAsync(Guid id);
         Task<ServiceResponse<Guid>> CreateAsync(StarSystemCreateRequest starSystem);
         Task<ServiceResponse<Guid>> UpdateAsync(StarSystemUpdateRequest starSystem);
-        Task<ServiceResponse<string>> DeleteAsync(string name);
+        Task<ServiceResponse<Guid>> DeleteAsync(Guid id);
     }
 }

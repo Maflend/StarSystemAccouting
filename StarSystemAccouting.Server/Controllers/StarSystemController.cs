@@ -67,22 +67,17 @@ namespace StarSystemAccouting.Server.Controllers
 
         }
 
-        [HttpDelete]
-        public async Task<ActionResult<string>> Delete(string name)
+        [HttpDelete("/Delete")]
+        public async Task<ActionResult<string>> Delete(Guid id)
         {
-            if(string.IsNullOrWhiteSpace(name))
-            {
-                return BadRequest("string is empty");
-            }
-
-            var response = await _starSystemService.DeleteAsync(name);
+            var response = await _starSystemService.DeleteAsync(id);
 
             if(!response.Status)
             {
                 return BadRequest(response.Message);
             }
 
-            return Ok(response);
+            return Ok(response.Data);
         }
         [HttpPost("/Update")]
         public async Task<ActionResult<Guid>> Update(StarSystemUpdateRequest request)

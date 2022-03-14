@@ -104,26 +104,26 @@ namespace StarSystemAccouting.Application.Services
             };
         }
 
-        public async Task<ServiceResponse<string>> DeleteAsync(string name)
+        public async Task<ServiceResponse<Guid>> DeleteAsync(Guid id)
         {
-            if(!_db.StarSystems.Any(s=>s.Name == name))
+            if(!_db.StarSystems.Any(s=>s.Id == id))
             {
-                return new ServiceResponse<string>()
+                return new ServiceResponse<Guid>()
                 {
                     Status = false,
-                    Message = "Звездная система с таким именем не существует",
-                    Data = name
+                    Message = "Звездная система не найдена",
+                    Data = new()
                 };
             }
 
 
-            _db.StarSystems.Remove(new StarSystem() { Name = name });
-            await _db.SaveChangesAsync(new CancellationToken());
+            _db.StarSystems.Remove(new StarSystem() { Id = id});
+            await _db.SaveChangesAsync();
 
-            return new ServiceResponse<string>()
+            return new ServiceResponse<Guid>()
             {
                 Status = true,
-                Data = name
+                Data = id
             };
         }
 
