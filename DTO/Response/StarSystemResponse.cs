@@ -9,6 +9,7 @@ namespace StarSystemAccouting.Application.DTOs.Response
 {
     public class StarSystemResponse
     {
+        public Guid Id { get; set; }
         public string Name { get; set; }
         public double Age { get; set; }
         public string CenterOfGravityName { get; set; }

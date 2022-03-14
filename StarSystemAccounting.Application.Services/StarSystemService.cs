@@ -132,9 +132,38 @@ namespace StarSystemAccouting.Application.Services
             throw new NotImplementedException();
         }
 
-        public Task<ServiceResponse<StarSystemResponse>> GetByNameAsync(string name)
+        public async Task<ServiceResponse<StarSystemResponse>> GetByIdAsync(Guid id)
         {
-            throw new NotImplementedException();
+            var starSystemEntity = await _db.StarSystems.FirstOrDefaultAsync(s => s.Id == id);
+
+            
+
+            if (starSystemEntity == null)
+                return new ServiceResponse<StarSystemResponse>()
+                {
+                    Status = false,
+                    Message = "Звездная система не найдена",
+                    Data = new()
+                };
+
+
+            _db.Entry(starSystemEntity).Collection(s => s.SpaceObjects).Query().FirstOrDefault(sobj => sobj.Id == starSystemEntity.CenterOfGravityId);
+
+            StarSystemResponse response = new()
+            {
+                Id = starSystemEntity.Id,
+                Age = starSystemEntity.Age,
+                Name = starSystemEntity.Name,
+                CenterOfGravityName = starSystemEntity.SpaceObjects.First().Name
+            };
+
+            return new ServiceResponse<StarSystemResponse>()
+            {
+                Status = true,
+                Data = response
+            };
+
+
         }
 
         public async Task<ServiceResponse<string>> UpdateAsync(StarSystemUpdateRequest starSystem)

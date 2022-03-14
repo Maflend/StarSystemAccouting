@@ -23,8 +23,22 @@ namespace StarSystemAccouting.Server.Controllers
             _spaceObjectService = spaceObjectService;
             _centerOfGravityService = centerOfGravityService;
         }
-        [HttpPost]
-        public async Task<ActionResult<StarSystemResponse>> Create(StarSystemCreateRequest request)
+
+        [HttpGet("/GetById")]
+        public async Task<ActionResult<StarSystemResponse>> GetById(Guid id)
+        {
+            var starSystemServiceResponse = await _starSystemService.GetByIdAsync(id);
+
+            if(!starSystemServiceResponse.Status)
+                return BadRequest(starSystemServiceResponse.Message);
+
+            return Ok(starSystemServiceResponse.Data);
+        }
+
+
+
+        [HttpPost("/Create")]
+        public async Task<ActionResult<Guid>> Create(StarSystemCreateRequest request)
         {
             if (!ModelState.IsValid)
             {
@@ -42,33 +56,11 @@ namespace StarSystemAccouting.Server.Controllers
 
 
 
-            //SpaceObjectCreateRequest spaceObjectCreateRequest = new()
-            //{
-            //    Name = request.CenterOfGravityName,
-            //    Age = request.CenterOfGravityAge,
-            //    Type = request.CenterOfGravityType,
-            //    Diameter = request.CenterOfGravityDiameter,
-            //    Weight = request.CenterOfGravityWeight,
-            //    StarSystemId = starSystemServiceResponse.Data
-
-            //};
-
-            //var spaceObjectServiceResponse = await _spaceObjectService.CreateAsync(spaceObjectCreateRequest);
-            //if (!spaceObjectServiceResponse.Status)
-            //{
-            //    return BadRequest(spaceObjectServiceResponse.Message);
-            //}
-
-
-            //var centerOfGravityServiceResponse = await _centerOfGravityService.SetAsync(starSystemServiceResponse.Data, spaceObjectServiceResponse.Data);
-            //if (!centerOfGravityServiceResponse.Status)
-            //{
-            //    return BadRequest(centerOfGravityServiceResponse.Message);
-            //}
+        
 
 
 
-            return Ok(starSystemServiceResponse);
+            return Ok(starSystemServiceResponse.Data);
 
         }
 
