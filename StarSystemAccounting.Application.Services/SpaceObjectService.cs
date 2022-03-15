@@ -164,6 +164,28 @@ namespace StarSystemAccouting.Application.Services
             };
         }
 
-        
+        public async Task<ServiceResponse<Guid>> DeleteAsync(Guid id) //Запретить удаление если обьект является центром масс для системы пока пользователь не выберет другой обьект центром.
+        {
+            try
+            {
+                _db.SpaceObjects.Remove(new SpaceObject { Id = id });
+            }
+            catch(Exception ex)
+            {
+                return new ServiceResponse<Guid>()
+                {
+                    Status = false,
+                    Message = ex.Message
+                };
+            }
+            await _db.SaveChangesAsync();
+
+            return new ServiceResponse<Guid>()
+            {
+                Status = true,
+                Data = id
+            };
+
+        }
     }
 }

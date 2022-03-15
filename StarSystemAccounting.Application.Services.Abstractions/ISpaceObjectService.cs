@@ -15,5 +15,6 @@ namespace StarSystemAccouting.Application.Services.Abstractions
         Task<ServiceResponse<SpaceObjectResponse>> GetById(Guid id);
         Task<ServiceResponse<List<SpaceObjectResponse>>> GetAll();
         Task<ServiceResponse<List<SpaceObjectResponse>>> GetAllByStarSystemId(Guid id);
+        Task<ServiceResponse<Guid>> DeleteAsync(Guid id);
     }
 }

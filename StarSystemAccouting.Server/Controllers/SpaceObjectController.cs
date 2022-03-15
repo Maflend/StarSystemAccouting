@@ -56,6 +56,16 @@ namespace StarSystemAccouting.Server.Controllers
 
             return Ok(spaceObjectServiceResponse.Data);
         }
+
+        [HttpDelete("Delete")]
+        public async Task<ActionResult<Guid>> Delete(Guid id)
+        {
+            var spaceObjectServiceResponse = await _spaceObjectService.DeleteAsync(id);
+            if (!spaceObjectServiceResponse.Status)
+                return BadRequest(spaceObjectServiceResponse.Message);
+
+            return Ok(spaceObjectServiceResponse.Data);
+        }
         
     }
 }
