@@ -57,6 +57,19 @@ namespace StarSystemAccouting.Server.Controllers
             return Ok(spaceObjectServiceResponse.Data);
         }
 
+        [HttpPost("Update")]
+        public async Task<ActionResult<Guid>> Update(SpaceObjectUpdateRequest request)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            var spaceObjectServiceResponse = await _spaceObjectService.UpdateAsync(request);
+            if (!spaceObjectServiceResponse.Status)
+                return BadRequest(spaceObjectServiceResponse.Message);
+
+            return Ok(spaceObjectServiceResponse.Data);
+        }
+
+
         [HttpDelete("Delete")]
         public async Task<ActionResult<Guid>> Delete(Guid id)
         {

@@ -163,6 +163,42 @@ namespace StarSystemAccouting.Application.Services
                 Data = spaceObject.Id
             };
         }
+        public async Task<ServiceResponse<Guid>> UpdateAsync(SpaceObjectUpdateRequest request)
+        {
+            if(!_db.SpaceObjects.Any(sobj=>sobj.Id == request.Id))
+            {
+                return new ServiceResponse<Guid>()
+                {
+                    Status = false,
+                    Message = "Космический обьект не найден"
+                };
+            }
+            if (!_db.ObjectType.Any(t=>t.Name == request.Type))
+            {
+                return new ServiceResponse<Guid>()
+                {
+                    Status = false,
+                    Message = "Неверный тип космического обьекта"
+                };
+            }
+
+            var spaceObject = await _db.SpaceObjects.FirstOrDefaultAsync(sobj => sobj.Id == request.Id);
+
+            spaceObject.Name = request.Name;
+            spaceObject.Diameter = request.Diameter;
+            spaceObject.Age = request.Age;
+            spaceObject.Type = request.Type;
+            spaceObject.Weight = request.Weight;
+
+            await _db.SaveChangesAsync();
+
+            return new ServiceResponse<Guid>()
+            {
+                Status = true,
+                Data = spaceObject.Id
+            };
+
+        }
 
         public async Task<ServiceResponse<Guid>> DeleteAsync(Guid id) //Запретить удаление если обьект является центром масс для системы пока пользователь не выберет другой обьект центром.
         {
@@ -187,5 +223,7 @@ namespace StarSystemAccouting.Application.Services
             };
 
         }
+
+   
     }
 }

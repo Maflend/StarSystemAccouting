@@ -82,10 +82,7 @@ namespace StarSystemAccouting.Server.Controllers
         [HttpPost("Update")]
         public async Task<ActionResult<Guid>> Update(StarSystemUpdateRequest request)
         {
-            if(!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+           
             var response = await _starSystemService.UpdateAsync(request);
 
             if(!response.Status)
