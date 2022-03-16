@@ -20,7 +20,7 @@ namespace StarSystemAccouting.Application.Services
         }
         public async Task<ServiceResponse<Guid>> SetAsync(Guid starSystemId, Guid spaceObjectId)
         {
-            var starSystemEntity = await _db.StarSystems.FirstAsync(s => s.Id == starSystemId);
+            var starSystemEntity = await _db.StarSystems.Include(s=>s.SpaceObjects).FirstAsync(s => s.Id == starSystemId);
             if (starSystemEntity == null)
                 return new ServiceResponse<Guid>
                 {
@@ -30,14 +30,13 @@ namespace StarSystemAccouting.Application.Services
                 };
 
 
-
-            var spaceObject = await _db.SpaceObjects.FirstAsync(sobj => sobj.Id == spaceObjectId);
+            var spaceObject =  starSystemEntity.SpaceObjects.FirstOrDefault(sobj => sobj.Id == spaceObjectId);
 
             if (spaceObject == null)
                 return new ServiceResponse<Guid>
                 {
                     Status = false,
-                    Message = "Космический обьект не существует",
+                    Message = "Космический обьект в заданной звездной системе не существует",
                     Data = new()
                 };
 
@@ -49,14 +48,15 @@ namespace StarSystemAccouting.Application.Services
                     Data = new()
                 };
 
-
-
             starSystemEntity.CenterOfGravityId = spaceObjectId;
+
+            await _db.SaveChangesAsync();
+
             return new ServiceResponse<Guid>
             {
                 Status = true,
 
-                Data = new()
+                Data = spaceObjectId
             };
         }
     }

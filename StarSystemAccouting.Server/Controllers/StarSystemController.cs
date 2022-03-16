@@ -83,14 +83,25 @@ namespace StarSystemAccouting.Server.Controllers
         public async Task<ActionResult<Guid>> Update(StarSystemUpdateRequest request)
         {
            
-            var response = await _starSystemService.UpdateAsync(request);
+            var starSystemServiceResponse = await _starSystemService.UpdateAsync(request);
 
-            if(!response.Status)
+            if(!starSystemServiceResponse.Status)
             {
-                return BadRequest(response.Message);
+                return BadRequest(starSystemServiceResponse.Message);
             }
 
-            return Ok(response.Data);
+            return Ok(starSystemServiceResponse.Data);
+        }
+        [HttpPost("SetCenterOfGravity")]
+        public async Task<ActionResult<bool>> SetCenterOfGravity(Guid starSystemId, Guid spaceObjectId)
+        {
+            var centerOfGravityServiceResponse = await _centerOfGravityService.SetAsync(starSystemId, spaceObjectId);
+            if (!centerOfGravityServiceResponse.Status)
+            {
+                return BadRequest(centerOfGravityServiceResponse.Message);
+            }
+
+            return Ok(centerOfGravityServiceResponse.Data);
         }
     }
 }
