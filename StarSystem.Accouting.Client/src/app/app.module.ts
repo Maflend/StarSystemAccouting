@@ -5,17 +5,21 @@ import {HttpClientModule} from '@angular/common/http';
 import {Routes, RouterModule} from '@angular/router';
 
 import { AppComponent }   from './app.component';
+import { SpaceObjectComponent }   from './spaceObject/spaceObject.component';
 import { SpaceObjectListComponent }   from './spaceObject/spaceObjectList/spaceObjectsList.component';
 
+const spaceObjectRoutes: Routes=[
+    {path: 'toList', component:SpaceObjectListComponent}
+];
 
 const appRoutes: Routes = [
-    {path: 'spaceObjects', component:SpaceObjectListComponent}
+    {path: 'spaceObject', component:SpaceObjectComponent, children:spaceObjectRoutes}
 ];
 
 
 @NgModule({
     imports:      [ BrowserModule, FormsModule, HttpClientModule, RouterModule.forRoot(appRoutes)],
-    declarations: [ AppComponent, SpaceObjectListComponent ],
+    declarations: [ AppComponent, SpaceObjectListComponent, SpaceObjectComponent ],
     bootstrap:    [ AppComponent ]
 })
 export class AppModule { }
