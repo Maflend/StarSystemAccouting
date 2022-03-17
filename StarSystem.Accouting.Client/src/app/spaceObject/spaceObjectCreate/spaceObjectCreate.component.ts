@@ -21,19 +21,15 @@ export class SpaceObjectCreateComponent implements OnInit{
     starSystem: StarSystem[] = [];
     
     constructor(private spaceObjectService: SpaceObjectService){}
+
     id: Guid = Guid.createEmpty();
-    submitt(myForm: NgForm){
-        console.log(myForm);
-    }
+   
     submit(myForm: NgForm){
-        
         this.id = this.starSystem.filter(s=>s.name == myForm.value.starSystemName)[0].id;
         this.spaceObjectService.create(new SpaceObjectCreateRequest( myForm.value.name,
             myForm.value.type, myForm.value.age, myForm.value.diameter, myForm.value.weight, this.id));
-    
     }
    
-
     ngOnInit(){
       this.spaceObjectService.getStarSystems().subscribe((data:any)=>this.starSystem = data);
     }
