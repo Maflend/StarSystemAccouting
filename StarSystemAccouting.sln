@@ -11,13 +11,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StarSystemAccouting.Persist
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "StarSystemAccouting.Application", "StarSystemAccouting.Application", "{A27E3BC1-F73D-4DD2-BE9B-83D5CE396CBC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarSystemAccouting.Application.Services", "StarSystemAccounting.Application.Services\StarSystemAccouting.Application.Services.csproj", "{9E55AEEA-B981-486D-B54D-44903216ADC5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StarSystemAccouting.Application.Services", "StarSystemAccounting.Application.Services\StarSystemAccouting.Application.Services.csproj", "{9E55AEEA-B981-486D-B54D-44903216ADC5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarSystemAccouting.Application.Services.Abstractions", "StarSystemAccounting.Application.Services.Abstractions\StarSystemAccouting.Application.Services.Abstractions.csproj", "{8B4BE75E-8824-40A4-855C-F467AE75406F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StarSystemAccouting.Application.Services.Abstractions", "StarSystemAccounting.Application.Services.Abstractions\StarSystemAccouting.Application.Services.Abstractions.csproj", "{8B4BE75E-8824-40A4-855C-F467AE75406F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarSystemAccouting.Application.DTOs", "DTO\StarSystemAccouting.Application.DTOs.csproj", "{03C6AB89-2732-4D13-AAD0-9C9B7E22CD9C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StarSystemAccouting.Application.DTOs", "DTO\StarSystemAccouting.Application.DTOs.csproj", "{03C6AB89-2732-4D13-AAD0-9C9B7E22CD9C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarSystemAccouting.Application", "StarSystemAccouting.Application\StarSystemAccouting.Application.csproj", "{169C8F88-A0D8-46A2-A89C-1FAD95072304}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StarSystemAccouting.Application", "StarSystemAccouting.Application\StarSystemAccouting.Application.csproj", "{169C8F88-A0D8-46A2-A89C-1FAD95072304}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
