@@ -19,15 +19,16 @@
     <label>Масса</label>
     <input class="form-control"  type="number" name="weight" [(ngModel)]= "spaceObject.weight"/>
   </div>
-
-  <label>Звездная система</label>
-  <select  name ="starSystemName" [(ngModel)]= "spaceObject.starSystemName">
-    <option [ngValue]="null">Выберите систему</option>
-    <option *ngFor="let item of starSystem">
-      {{item.name}}
-    </option>
-  </select>
+  <div class="form-group">
+    <label>Звездная система</label>
+    <select class="form-select" name ="starSystemName" [(ngModel)]= "spaceObject.starSystemName">
+      <option [ngValue]="null">Выберите систему</option>
+      <option *ngFor="let item of starSystem">
+        {{item.name}}
+      </option>
+    </select>
+  </div>
   <br/>
-  <button class="btn btn-primary" (click)="submit(myForm)">Создать</button>
+  <button class="btn btn-primary mt-2" (click)="submit(myForm)">Создать</button>
   </form>
 

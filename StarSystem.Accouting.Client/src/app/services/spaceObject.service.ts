@@ -15,12 +15,16 @@ export class SpaceObjectService {
     }
     create(spaceObjectCreate: SpaceObjectCreateRequest){
         //return this.http.post("https://localhost:7090/api/SpaceObject/Create",spaceObjectCreate).;
-        return this.http.post("https://localhost:7090/api/SpaceObject/Create",spaceObjectCreate).subscribe(data => {
+        return this.http.post("https://localhost:7090/api/SpaceObject/Create",spaceObjectCreate).subscribe(
+            data => {
             console.log("Создал обьект с id: ", data);
+            window.location.href = '/spaceObject/toList';
             },
             err => {
             console.log("ErrorMY:", err);
+            
             });
+            
     }
     getStarSystems(){
         return this.http.get("https://localhost:7090/api/StarSystem/GetAll");
