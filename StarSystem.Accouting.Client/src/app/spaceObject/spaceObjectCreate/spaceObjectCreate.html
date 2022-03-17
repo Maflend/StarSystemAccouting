@@ -1,0 +1,33 @@
+<form #myForm="ngForm" novalidate>
+  <div class="form-group">
+    <label>Наименование</label>
+    <input class="form-control" name="name" [(ngModel)]= "spaceObject.name"/>
+  </div>
+  <div class="form-group">
+    <label>Тип</label>
+    <input class="form-control" name="type" [(ngModel)]= "spaceObject.type"/>
+  </div>
+  <div class="form-group">
+    <label>Возвраст</label>
+    <input class="form-control" type="number" name="age" [(ngModel)]= "spaceObject.age"/>
+  </div>
+  <div class="form-group">
+    <label>Диаметр</label>
+    <input class="form-control"  type="number" name="diameter" [(ngModel)]= "spaceObject.diameter"/>
+  </div>
+  <div class="form-group">
+    <label>Масса</label>
+    <input class="form-control"  type="number" name="weight" [(ngModel)]= "spaceObject.weight"/>
+  </div>
+
+  <label>Звездная система</label>
+  <select  name ="starSystemName" [(ngModel)]= "spaceObject.starSystemName">
+    <option [ngValue]="null">Выберите систему</option>
+    <option *ngFor="let item of starSystem">
+      {{item.name}}
+    </option>
+  </select>
+  <br/>
+  <button class="btn btn-primary" (click)="submit(myForm)">Создать</button>
+  </form>
+

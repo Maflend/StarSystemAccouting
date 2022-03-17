@@ -7,9 +7,11 @@ import {Routes, RouterModule} from '@angular/router';
 import { AppComponent }   from './app.component';
 import { SpaceObjectComponent }   from './spaceObject/spaceObject.component';
 import { SpaceObjectListComponent }   from './spaceObject/spaceObjectList/spaceObjectsList.component';
+import {SpaceObjectCreateComponent} from './spaceObject/SpaceObjectCreate/spaceObjectCreate.component';
 
 const spaceObjectRoutes: Routes=[
-    {path: 'toList', component:SpaceObjectListComponent}
+    {path: 'toList', component:SpaceObjectListComponent},
+    {path: 'create', component:SpaceObjectCreateComponent},
 ];
 
 const appRoutes: Routes = [
@@ -19,7 +21,7 @@ const appRoutes: Routes = [
 
 @NgModule({
     imports:      [ BrowserModule, FormsModule, HttpClientModule, RouterModule.forRoot(appRoutes)],
-    declarations: [ AppComponent, SpaceObjectListComponent, SpaceObjectComponent ],
+    declarations: [ AppComponent, SpaceObjectListComponent, SpaceObjectComponent, SpaceObjectCreateComponent ],
     bootstrap:    [ AppComponent ]
 })
 export class AppModule { }
