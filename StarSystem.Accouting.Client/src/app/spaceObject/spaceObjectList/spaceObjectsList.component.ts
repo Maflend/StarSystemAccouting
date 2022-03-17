@@ -2,8 +2,8 @@ import {Component, OnInit} from '@angular/core'
 import { NgForm } from '@angular/forms';
 import { Guid } from 'guid-typescript';
 import {SpaceObjectService} from '../../services/spaceObject.service'
-import {SpaceObject} from '../spaceObject.model';
-import { SpaceObjectUpdate } from '../SpaceObjectUpdate.model';
+import {SpaceObject} from '../models/spaceObject.model';
+import { SpaceObjectUpdate } from '../models/SpaceObjectUpdate.model';
 
 @Component({
     selector:'spaceObjectsList-comp',

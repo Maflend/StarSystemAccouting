@@ -1,0 +1,1 @@
+{"ast":null,"code":"export class SpaceObjectCreate {\n  constructor() {\n    this.name = \"\";\n    this.type = \"\";\n    this.age = 0;\n    this.diameter = 0;\n    this.weight = 0;\n    this.starSystemName = \"\";\n  }\n\n}","map":null,"metadata":{},"sourceType":"module"}

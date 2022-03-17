@@ -3,9 +3,9 @@ import { Injectable } from '@angular/core';
 import { Guid } from 'guid-typescript';
 import { request } from 'http';
 import { catchError, Observable } from 'rxjs';
-import { SpaceObjectCreate } from '../spaceObject/spaceObjectCreate.model';
-import {SpaceObjectCreateRequest} from '../spaceObject/spaceObjectCreateRequest.model';
-import {SpaceObjectUpdate} from '../spaceObject/SpaceObjectUpdate.model';
+import { SpaceObjectCreate } from '../spaceObject/models/spaceObjectCreate.model';
+import {SpaceObjectCreateRequest} from '../spaceObject/models/spaceObjectCreateRequest.model';
+import {SpaceObjectUpdate} from '../spaceObject/models/SpaceObjectUpdate.model';
 @Injectable()
 export class SpaceObjectService {
     constructor(private http: HttpClient){}
@@ -45,7 +45,7 @@ export class SpaceObjectService {
     update(spaceObj:SpaceObjectUpdate){
         console.log("id:" + spaceObj.id + "|| name:" + spaceObj.name);
         console.log("type:" + spaceObj.type + "|| weight:" + spaceObj.weight);
-        console.log("diameter:" + spaceObj.diameter + "|| age:" + spaceObj.age);
+        console.log("diameter:" + spaceObj.diameter + "|| age:" + spaceObj.name);
         return this.http.post("https://localhost:7090/api/SpaceObject/Update", spaceObj).subscribe(
             data => {
             console.log("Обновил обьект с id: ", data);

@@ -1,13 +1,13 @@
 import {Component, OnInit} from '@angular/core'
 import {SpaceObjectService} from '../../services/spaceObject.service'
-import {SpaceObjectCreate} from '../spaceObjectCreate.model';
-import {SpaceObjectCreateRequest} from '../spaceObjectCreateRequest.model';
-import {StarSystem} from '../../starSystem/starSystem.model'
+import {SpaceObjectCreate} from '../models/spaceObjectCreate.model';
+import {SpaceObjectCreateRequest} from '../models/spaceObjectCreateRequest.model';
+import {StarSystem} from '../../starSystem/models/starSystem.model'
 import { Guid } from "guid-typescript";
 import { NgForm } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { SpaceObjectUpdate } from '../SpaceObjectUpdate.model';
+import { SpaceObjectUpdate } from '../models/SpaceObjectUpdate.model';
 import { ActivatedRoute} from '@angular/router';
 
 

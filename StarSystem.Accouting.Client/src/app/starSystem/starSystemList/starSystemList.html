@@ -1,0 +1,23 @@
+<div class="card-body">
+    <table class="table">
+        <thead>
+            <tr>
+                <td>Name</td>
+                <td>Age</td>
+                <td>Center of gravity</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of starSystems">
+                <td>{{item.name}}</td>
+                <td>{{item.age}}</td>
+                <td>{{item.centerOfGravityName}}</td>
+                <td>
+                    <!-- <button class="btn btn-primary" [routerLink]="['update/', item.id]" style="margin-right:5px;">Редактировать</button>
+                    <button class="btn btn-danger" (click)="deleteHandler(item.id)" style="margin-right:5px;">Удалить</button> -->
+                </td>
+            </tr>
+        </tbody>
+       
+    </table>
+</div>
