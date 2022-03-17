@@ -1,0 +1,30 @@
+{
+    "name": "starsystemaccoutingclient",
+    "version": "1.0.0",
+    "description": "Angular application for StarSystemAccouting",
+    "author": "Maflend",
+    "scripts": {
+        "ng": "ng",
+        "start": "ng serve",
+        "build": "ng build"
+    },
+    "dependencies": {
+        "@angular/common": "~13.0.0",
+        "@angular/compiler": "~13.0.0",
+        "@angular/core": "~13.0.0",
+        "@angular/forms": "~13.0.0",
+        "@angular/platform-browser": "~13.0.0",
+        "@angular/platform-browser-dynamic": "~13.0.0",
+        "@angular/router": "~13.0.0",
+        "guid-typescript": "^1.0.9",
+        "rxjs": "~7.4.0",
+        "zone.js": "~0.11.4"
+    },
+    "devDependencies": {
+        "@angular-devkit/build-angular": "~13.0.0",
+        "@angular/cli": "~13.0.0",
+        "@angular/compiler-cli": "~13.0.0",
+        "@types/node": "~16.11.0",
+        "typescript": "~4.4.4"
+    }
+}
