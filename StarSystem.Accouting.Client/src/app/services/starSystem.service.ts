@@ -2,10 +2,20 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Guid } from "guid-typescript";
 import {StarSystemUpdateRequest} from '../starSystem/models/starSystemUpdateRequest.model'
+import {StarSystemCreateRequest} from '../starSystem/models/starSystemCreateRequest.model';
 @Injectable()
 export class StarSystemService {
     constructor(private http: HttpClient){}
-
+    create(request: StarSystemCreateRequest){
+        return this.http.post("https://localhost:7090/api/StarSystem/Create", request).subscribe(
+            data=>{
+                window.location.href="/starSystem/toList";
+            },
+            err=>{
+                console.log("ErrorCreate:", err);
+            }
+        );
+    }
     getAll() {
         return this.http.get("https://localhost:7090/api/StarSystem/GetAll");
     }

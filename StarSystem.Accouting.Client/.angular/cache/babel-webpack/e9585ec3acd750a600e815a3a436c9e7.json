@@ -1,0 +1,1 @@
+{"ast":null,"code":"export class StarSystemCreate {\n  constructor() {\n    this.name = \"\";\n    this.age = 0;\n    this.centerOfGravityName = \"\";\n    this.centerOfGravityType = \"\";\n    this.centerOfGravityAge = 0;\n    this.centerOfGravityDiameter = 0;\n    this.centerOfGravityWeight = 0;\n  }\n\n}","map":null,"metadata":{},"sourceType":"module"}

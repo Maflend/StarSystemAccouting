@@ -12,6 +12,7 @@ import {SpaceObjectUpdateComponent} from './spaceObject/SpaceObjectUpdate/spaceO
 import {StarSystemListComponent} from './starSystem/starSystemList/starSystemList.component';
 import {StarSystemComponent} from './starSystem/starSystem.component';
 import {StarSystemUpdateComponent} from './starSystem/starSystemUpdate/starSystemUpdate.component';
+import {StarSystemCreateComponent} from './starSystem/starSystemCreate/starSystemCreate.component';
 
 const spaceObjectRoutes: Routes=[
     {path: 'toList', component:SpaceObjectListComponent},
@@ -20,7 +21,8 @@ const spaceObjectRoutes: Routes=[
 ];
 const starSystemRoutes: Routes=[
     {path: 'toList', component:StarSystemListComponent},
-    {path: 'toList/update/:id', component: StarSystemUpdateComponent}
+    {path: 'toList/update/:id', component: StarSystemUpdateComponent},
+    {path: 'create', component: StarSystemCreateComponent}
 ];
 
 const appRoutes: Routes = [
@@ -32,7 +34,7 @@ const appRoutes: Routes = [
 @NgModule({
     imports:      [ BrowserModule, FormsModule, HttpClientModule, RouterModule.forRoot(appRoutes)],
     declarations: [ AppComponent, SpaceObjectListComponent, SpaceObjectComponent, SpaceObjectCreateComponent, SpaceObjectUpdateComponent,
-    StarSystemComponent, StarSystemListComponent, StarSystemUpdateComponent ],
+    StarSystemComponent, StarSystemListComponent, StarSystemUpdateComponent, StarSystemCreateComponent ],
     bootstrap:    [ AppComponent ]
 })
 export class AppModule { }

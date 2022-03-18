@@ -9,11 +9,11 @@ export class StarSystemCreateRequest{
             this.centerOfGravityDiameter = centerOfGravityDiameter;
             this.centerOfGravityWeight = centerOfGravityWeight;
     }
-    public name:string;
-    public age:number;
-    public centerOfGravityName:string;
-    public centerOfGravityType:string;
-    public centerOfGravityAge:number;
-    public centerOfGravityDiameter:number;
-    public centerOfGravityWeight:number;
+    public name:string = "";
+    public age:number = 0;
+    public centerOfGravityName:string = "";
+    public centerOfGravityType:string = "";
+    public centerOfGravityAge:number = 0;
+    public centerOfGravityDiameter:number = 0;
+    public centerOfGravityWeight:number = 0;
 }

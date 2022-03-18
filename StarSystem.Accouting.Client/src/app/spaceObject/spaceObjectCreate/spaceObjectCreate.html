@@ -1,27 +1,27 @@
 <form #myForm="ngForm" novalidate>
   <div class="form-group">
     <label>Наименование</label>
-    <input class="form-control" name="name" [(ngModel)]= "spaceObject.name"/>
+    <input class="form-control" name="name" [(ngModel)]= "spaceObject.name" #name="ngModel" required />
   </div>
   <div class="form-group">
     <label>Тип</label>
-    <input class="form-control" name="type" [(ngModel)]= "spaceObject.type"/>
+    <input class="form-control" name="type" [(ngModel)]= "spaceObject.type" #type="ngModel" required />
   </div>
   <div class="form-group">
     <label>Возвраст</label>
-    <input class="form-control" type="number" name="age" [(ngModel)]= "spaceObject.age"/>
+    <input class="form-control" type="number" name="age" [(ngModel)]= "spaceObject.age" #age="ngModel" required />
   </div>
   <div class="form-group">
     <label>Диаметр</label>
-    <input class="form-control"  type="number" name="diameter" [(ngModel)]= "spaceObject.diameter"/>
+    <input class="form-control"  type="number" name="diameter" [(ngModel)]= "spaceObject.diameter" #diameter="ngModel" required />
   </div>
   <div class="form-group">
     <label>Масса</label>
-    <input class="form-control"  type="number" name="weight" [(ngModel)]= "spaceObject.weight"/>
+    <input class="form-control"  type="number" name="weight" [(ngModel)]= "spaceObject.weight" #weight="ngModel" required />
   </div>
   <div class="form-group">
     <label>Звездная система</label>
-    <select class="form-select" name ="starSystemName" [(ngModel)]= "spaceObject.starSystemName">
+    <select class="form-select" name ="starSystemName" [(ngModel)]= "spaceObject.starSystemName" #starSystemName="ngModel" required>
       <option [ngValue]="null">Выберите систему</option>
       <option *ngFor="let item of starSystem">
         {{item.name}}
@@ -29,6 +29,8 @@
     </select>
   </div>
   <br/>
-  <button class="btn btn-primary mt-2" (click)="submit(myForm)">Создать</button>
+  <button [disabled]= "name.invalid || type.invalid || age.invalid || diameter.invalid || weight.invalid || starSystemName.invalid" class="btn btn-primary mt-2" (click)="submit(myForm)">
+    Создать
+  </button>
   </form>
 

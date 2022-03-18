@@ -1,0 +1,38 @@
+<form #myForm="ngForm" novalidate>
+    <div class="form-group">
+      <label>Наименование</label>
+      <input class="form-control" name="name" [(ngModel)]= "starSystemCreate.name"/>
+    </div>
+    <div class="form-group">
+      <label>Возвраст</label>
+      <input class="form-control" name="age" [(ngModel)]= "starSystemCreate.age"/>
+    </div>
+    
+    <br>
+    <label>Создание начального космического обьекта (центра гравитации)</label>
+    <br>
+    <div class="form-group">
+      <label>Наименование</label>
+      <input class="form-control" name="centerOfGravityName" [(ngModel)]= "starSystemCreate.centerOfGravityName"/>
+    </div>
+    <div class="form-group">
+      <label>Тип</label>
+      <input class="form-control"  name="centerOfGravityType" [(ngModel)]= "starSystemCreate.centerOfGravityType"/>
+    </div>
+    <div class="form-group">
+      <label>Возвраст</label>
+      <input class="form-control"  type="number" name="centerOfGravityAge" [(ngModel)]= "starSystemCreate.centerOfGravityAge"/>
+    </div>
+    <div class="form-group">
+        <label>Диаметр</label>
+        <input class="form-control"  name="centerOfGravityDiameter" [(ngModel)]= "starSystemCreate.centerOfGravityDiameter"/>
+      </div>
+      <div class="form-group">
+        <label>Масса</label>
+        <input class="form-control"  name="centerOfGravityWeight" [(ngModel)]= "starSystemCreate.centerOfGravityWeight"/>
+      </div>
+      
+    <br/>
+    <button class="btn btn-primary mt-2" (click)="submit(myForm)">Создать</button>
+    </form>
+  
