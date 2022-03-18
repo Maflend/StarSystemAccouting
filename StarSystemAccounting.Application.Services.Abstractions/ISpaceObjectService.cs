@@ -12,7 +12,7 @@ namespace StarSystemAccouting.Application.Services.Abstractions
     public interface ISpaceObjectService
     {
         Task<ServiceResponse<SpaceObjectResponse>> GetById(Guid id);
-        Task<ServiceResponse<List<SpaceObjectResponse>>> GetAll();
+        Task<ServiceResponse<List<SpaceObjectWithStarSystemNameResponse>>> GetAll();
         Task<ServiceResponse<List<SpaceObjectResponse>>> GetAllByStarSystemId(Guid id);
         Task<ServiceResponse<Guid>> CreateAsync(SpaceObjectCreateRequest spaceObject);
         Task<ServiceResponse<Guid>> UpdateAsync(SpaceObjectUpdateRequest request);

@@ -128,12 +128,12 @@ namespace StarSystemAccouting.Application.Services
         }
 
         public async Task<ServiceResponse<List<StarSystemResponse>>> GetAllAsync()
-        {
+        { 
             var starSystemEntity = await _db.StarSystems
-                .Include(starsyst=>starsyst.SpaceObjects.Where(sobj=>sobj.Id == starsyst.CenterOfGravityId))
-                .Select(res=>new StarSystemResponse { Id = res.Id, Age = res.Age, Name = res.Name, CenterOfGravityName = res.SpaceObjects.First().Name }).ToListAsync();
+               .Include(starsyst => starsyst.SpaceObjects)
+               .Select(res => new StarSystemResponse { Id = res.Id, Age = res.Age, Name = res.Name, CenterOfGravityName = res.SpaceObjects.First(obj=>obj.Id == res.CenterOfGravityId).Name }).ToListAsync();
 
-            if(starSystemEntity == null)
+            if (starSystemEntity == null)
                 return new ServiceResponse<List<StarSystemResponse>>()
                 {
                     Status = true,
@@ -145,7 +145,6 @@ namespace StarSystemAccouting.Application.Services
                 Status = true,
                 Data = starSystemEntity
             };
-
 
 
         }
@@ -197,24 +196,23 @@ namespace StarSystemAccouting.Application.Services
                 };
             }
 
-            if (_db.StarSystems.Any(s=>s.Name == starSystem.Name))
-            {
-                return new ServiceResponse<Guid>()
-                {
-                    Status = false,
-                    Message = "Звездная система с таким именем уже существует",
-                    Data = starSystem.Id
-                };
-            }
-
-
-
             var StarSystemEntity = _db.StarSystems.First(s=>s.Id == starSystem.Id);
 
             StarSystemEntity.Name = starSystem.Name;
             StarSystemEntity.Age = starSystem.Age;
 
-            await _db.SaveChangesAsync();
+            try
+            {
+                await _db.SaveChangesAsync();
+            }
+            catch(Exception ex)
+            {
+                return new ServiceResponse<Guid>()
+                {
+                    Status = false,
+                    Message = "Звездная система с таким именем уже существует"
+                };
+            }
 
             return new ServiceResponse<Guid>()
             {

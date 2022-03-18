@@ -1,0 +1,1 @@
+{"ast":null,"code":"import { Guid } from \"guid-typescript\";\nexport class StarSystem {\n  constructor() {\n    this.id = Guid.createEmpty();\n    this.name = \"\";\n    this.age = 0;\n    this.centerOfGravityName = \"\";\n  }\n\n}","map":null,"metadata":{},"sourceType":"module"}

@@ -1,13 +1,14 @@
-
+<p class="text-danger">{{this.spaceObjectService.errorMessage}}</p>
     <div class="card-body">
         <table class="table">
             <thead>
                 <tr>
-                    <td>Name</td>
-                    <td>Type</td>
-                    <td>Age</td>
-                    <td>Diameter</td>
-                    <td>Weight</td>
+                    <td>Наименование</td>
+                    <td>Тип</td>
+                    <td>Возвраст</td>
+                    <td>Диаметр</td>
+                    <td>Масса</td>
+                    <td>Звездная система</td>
                 </tr>
             </thead>
             <tbody>
@@ -17,6 +18,7 @@
                     <td>{{item.age}}</td>
                     <td>{{item.diameter}}</td>
                     <td>{{item.weight}}</td>
+                    <td>{{item.starSystemName}}</td>
                     <td>
                         <button class="btn btn-primary" [routerLink]="['update/', item.id]" style="margin-right:5px;">Редактировать</button>
                         <button class="btn btn-danger" (click)="deleteHandler(item.id)" style="margin-right:5px;">Удалить</button>

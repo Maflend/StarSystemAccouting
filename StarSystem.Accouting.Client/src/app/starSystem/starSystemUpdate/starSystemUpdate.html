@@ -1,0 +1,24 @@
+<p class="text-danger">{{this.starSystemService.errorMessage}}</p>
+<p class="text-danger">{{this.spaceObjectService.errorMessage}}</p>
+<form #myForm="ngForm" novalidate>
+    <div class="form-group">
+        <label>Наименование</label>
+        <input [(ngModel)]= "starSystem.name" class="form-control" name="name" #name="ngModel" required/>
+    </div>
+    <div class="form-group">
+        <label>Возвраст</label>
+        <input [(ngModel)]= "starSystem.age" class="form-control" type="number" name="age" #age="ngModel" required/>
+    </div>
+    <div class="form-group">
+        <label>Текущий центр гравитации: {{currentCenterOfGravity}}</label>
+        <select class="form-select" name="centerOfGravityName" [(ngModel)]= "starSystem.centerOfGravityName" #centerOfGravityName="ngModel" required>
+            <option [ngValue]="null">Выбрать другой</option>
+            <option *ngFor="let item of spaceObjectsByStarSystem">
+                {{item.name}}
+            </option>
+        </select>
+    </div>
+    <button class="btn btn-primary mt-2" (click)="submit(myForm)" [disabled]= "name.invalid || age.invalid || centerOfGravityName.invalid">
+        Сохранить
+    </button>
+</form>

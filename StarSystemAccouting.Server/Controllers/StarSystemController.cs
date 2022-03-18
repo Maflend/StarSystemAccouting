@@ -67,7 +67,7 @@ namespace StarSystemAccouting.Server.Controllers
 
         }
 
-        [HttpDelete("Delete")]
+        [HttpDelete("Delete/{id}")]
         public async Task<ActionResult<string>> Delete(Guid id)
         {
             var response = await _starSystemService.DeleteAsync(id);
@@ -93,9 +93,9 @@ namespace StarSystemAccouting.Server.Controllers
             return Ok(starSystemServiceResponse.Data);
         }
         [HttpPost("SetCenterOfGravity")]
-        public async Task<ActionResult<bool>> SetCenterOfGravity(Guid starSystemId, Guid spaceObjectId)
+        public async Task<ActionResult<bool>> SetCenterOfGravity(SetCenterOfGravityRequest request)
         {
-            var centerOfGravityServiceResponse = await _centerOfGravityService.SetAsync(starSystemId, spaceObjectId);
+            var centerOfGravityServiceResponse = await _centerOfGravityService.SetAsync(request.StarSystemId, request.SpaceObjectId);
             if (!centerOfGravityServiceResponse.Status)
             {
                 return BadRequest(centerOfGravityServiceResponse.Message);

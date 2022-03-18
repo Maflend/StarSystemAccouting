@@ -1,26 +1,29 @@
+<p class="text-danger">{{this.spaceObjectService.errorMessage}}</p>
 <form #myForm="ngForm" novalidate>
     <div class="form-group">
       <label>Наименование</label>
-      <input class="form-control" name="name" [(ngModel)]= "spaceObject.name"/>
+      <input class="form-control" name="name" [(ngModel)]= "spaceObject.name" #name="ngModel" required/>
     </div>
     <div class="form-group">
       <label>Тип</label>
-      <input class="form-control" name="type" [(ngModel)]= "spaceObject.type"/>
+      <input class="form-control" name="type" [(ngModel)]= "spaceObject.type" #type="ngModel" required/>
     </div>
     <div class="form-group">
       <label>Возвраст</label>
-      <input class="form-control" type="number" name="age" [(ngModel)]= "spaceObject.age"/>
+      <input class="form-control" type="number" name="age" [(ngModel)]= "spaceObject.age" #age="ngModel" required/>
     </div>
     <div class="form-group">
       <label>Диаметр</label>
-      <input class="form-control"  type="number" name="diameter" [(ngModel)]= "spaceObject.diameter"/>
+      <input class="form-control"  type="number" name="diameter" [(ngModel)]= "spaceObject.diameter" #diameter="ngModel" required/>
     </div>
     <div class="form-group">
       <label>Масса</label>
-      <input class="form-control"  type="number" name="weight" [(ngModel)]= "spaceObject.weight"/>
+      <input class="form-control"  type="number" name="weight" [(ngModel)]= "spaceObject.weight" #weight="ngModel" required/>
     </div>
     
     <br/>
-    <button class="btn btn-primary mt-2" (click)="submit(myForm)">Сохранить</button>
+    <button class="btn btn-primary mt-2" (click)="submit(myForm)" [disabled]= "name.invalid || age.invalid || type.invalid || diameter.invalid || weight.invalid">
+      Сохранить
+    </button>
 </form>
   

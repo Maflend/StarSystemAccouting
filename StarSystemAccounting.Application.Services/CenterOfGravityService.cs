@@ -20,12 +20,12 @@ namespace StarSystemAccouting.Application.Services
         }
         public async Task<ServiceResponse<Guid>> SetAsync(Guid starSystemId, Guid spaceObjectId)
         {
-            var starSystemEntity = await _db.StarSystems.Include(s=>s.SpaceObjects).FirstAsync(s => s.Id == starSystemId);
+            var starSystemEntity = await _db.StarSystems.Include(s=>s.SpaceObjects).FirstOrDefaultAsync(s => s.Id == starSystemId);
             if (starSystemEntity == null)
                 return new ServiceResponse<Guid>
                 {
                     Status = false,
-                    Message = "Звездная система не существует",
+                    Message = "Звездная система не существует id=" + starSystemId.ToString() + "  космid=" + spaceObjectId.ToString(),
                     Data = new()
                 };
 
@@ -44,7 +44,7 @@ namespace StarSystemAccouting.Application.Services
                 return new ServiceResponse<Guid>
                 {
                     Status = false,
-                    Message = "Тип космического обьекта должен быть Звезда / Черная дыра",
+                    Message = "Тип космического обьекта для установления центром гравитации должен быть Звезда / Черная дыра",
                     Data = new()
                 };
 

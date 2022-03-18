@@ -28,7 +28,7 @@ namespace StarSystemAccouting.Server.Controllers
         }
 
         [HttpGet("GetAll")]
-        public async Task<ActionResult<List<SpaceObjectResponse>>> GetAll()
+        public async Task<ActionResult<List<SpaceObjectWithStarSystemNameResponse>>> GetAll()
         {
             var spaceObjectServiceResponse = await _spaceObjectService.GetAll();
             if(!spaceObjectServiceResponse.Status)
