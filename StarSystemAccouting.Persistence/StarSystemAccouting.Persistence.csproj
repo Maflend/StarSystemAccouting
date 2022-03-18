@@ -20,7 +20,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\StarSystemAccouting.Application\StarSystemAccouting.Application.csproj" />
     <ProjectReference Include="..\StarSystemAccouting.Domain\StarSystemAccouting.Domain.csproj" />
   </ItemGroup>
 
