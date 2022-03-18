@@ -1,4 +1,6 @@
 # StarSystemAccouting
+
+Для Angular использовался Visual Studio Code. Для asp.net web api использовалась Visual Studio 2022 .NET6.
 Список космических обьектов
 ![alt text](Screenshots/ПокзКосмОб.png "Список космических обьектов")
 
