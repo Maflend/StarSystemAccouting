@@ -34,6 +34,16 @@ export class StarSystemService {
             console.log("ErrorSetCenterOfGravity:", err);
             });
     }
+    delete(id: Guid){
+        return this.http.delete("https://localhost:7090/api/StarSystem/Delete/" + id).subscribe(
+            data => {
+            console.log("Удалил обьект с id: ", data);
+            window.location.href = '/starSystem/toList';
+            },
+            err => {
+            console.log("ErrorDelete:", err);
+            });
+    }
 }
 
 export class Data{

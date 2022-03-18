@@ -14,7 +14,7 @@
                 <td>{{item.centerOfGravityName}}</td>
                 <td>
                     <button class="btn btn-primary" [routerLink]="['update/', item.id]" style="margin-right:5px;">Редактировать</button>
-                    <!-- <button class="btn btn-danger" (click)="deleteHandler(item.id)" style="margin-right:5px;">Удалить</button> -->
+                    <button class="btn btn-danger" (click)="deleteHandler(item.id)" style="margin-right:5px;">Удалить</button> 
                 </td>
             </tr>
         </tbody>
