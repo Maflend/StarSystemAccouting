@@ -1,0 +1,1 @@
+{"ast":null,"code":"import { Guid } from \"guid-typescript\";\nexport class StarSystemUpdateRequest {\n  constructor(id, name, age) {\n    this.id = Guid.createEmpty();\n    this.name = \"\";\n    this.age = 0;\n    this.id = id;\n    this.name = name;\n    this.age = age;\n  }\n\n}","map":null,"metadata":{},"sourceType":"module"}

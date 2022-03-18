@@ -1,0 +1,1 @@
+{"ast":null,"code":"export class StarSystemUpdateRequest {\n  constructor(id, name, age) {}\n\n}","map":null,"metadata":{},"sourceType":"module"}

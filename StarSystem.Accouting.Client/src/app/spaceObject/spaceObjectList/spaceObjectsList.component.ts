@@ -22,8 +22,4 @@ export class SpaceObjectListComponent implements OnInit{
     deleteHandler(id:Guid){
         this.spaceObjectService.delete(id);
     }
-    updateHandler(id:Guid){
-        //this.spaceObjectService.update(new SpaceObjectUpdate(myForm.value.id, myForm.value.name, myForm.value.age, myForm.value.type, myForm.value.weight, myForm.value.diameter));
-        
-    }
 }

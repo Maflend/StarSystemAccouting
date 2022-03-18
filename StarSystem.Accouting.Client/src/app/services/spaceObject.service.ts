@@ -29,8 +29,8 @@ export class SpaceObjectService {
             });
             
     }
-    getStarSystems(){
-        return this.http.get("https://localhost:7090/api/StarSystem/GetAll");
+    getAllByStarSystemId(id: Guid){
+        return this.http.get("https://localhost:7090/api/SpaceObject/GetAllByStarSystemId?StarSystemId=" + id);
     }
     delete(id:Guid){
         return this.http.delete("https://localhost:7090/api/SpaceObject/Delete/"+ id).subscribe(
