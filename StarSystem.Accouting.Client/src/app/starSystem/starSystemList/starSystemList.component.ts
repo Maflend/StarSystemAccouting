@@ -14,9 +14,7 @@ export class StarSystemListComponent implements OnInit {
     starSystems: StarSystem[] = [];
 
     ngOnInit(){
-        console.log("GGWP");
        this.starSystemService.getAll().subscribe((data:any)=> this.starSystems = data);
-       console.log("name:" + this.starSystems[0].name);
     }
     deleteHandler(id: Guid){
         this.starSystemService.delete(id);

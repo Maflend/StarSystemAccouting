@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule }   from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {Routes, RouterModule} from '@angular/router';
-
 import { AppComponent }   from './app.component';
 import { SpaceObjectComponent }   from './spaceObject/spaceObject.component';
 import { SpaceObjectListComponent }   from './spaceObject/spaceObjectList/spaceObjectsList.component';
@@ -13,6 +12,8 @@ import {StarSystemListComponent} from './starSystem/starSystemList/starSystemLis
 import {StarSystemComponent} from './starSystem/starSystem.component';
 import {StarSystemUpdateComponent} from './starSystem/starSystemUpdate/starSystemUpdate.component';
 import {StarSystemCreateComponent} from './starSystem/starSystemCreate/starSystemCreate.component';
+
+
 
 const spaceObjectRoutes: Routes=[
     {path: 'toList', component:SpaceObjectListComponent},
@@ -29,6 +30,8 @@ const appRoutes: Routes = [
     {path: 'spaceObject', component:SpaceObjectComponent, children:spaceObjectRoutes},
     {path: 'starSystem', component:StarSystemComponent, children:starSystemRoutes}
 ];
+
+
 
 
 @NgModule({

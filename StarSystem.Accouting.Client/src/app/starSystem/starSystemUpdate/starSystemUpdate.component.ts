@@ -24,7 +24,6 @@ export class StarSystemUpdateComponent{
 
     constructor(private activatedRoute: ActivatedRoute, public starSystemService: StarSystemService, public spaceObjectService: SpaceObjectService){
         this.starSystemId = activatedRoute.snapshot.params['id'];
-        
     }
 
     ngOnInit(){
@@ -34,7 +33,6 @@ export class StarSystemUpdateComponent{
     }
 
     submit(myForm: NgForm){
-        
         this.spaceObjectid = this.spaceObjectsByStarSystem.filter(sobj=>sobj.name == this.starSystem.centerOfGravityName)[0].id;
         this.starSystemService.update(new StarSystemUpdateRequest( this.starSystemId, myForm.value.name, myForm.value.age), this.starSystemId, this.spaceObjectid);
     }

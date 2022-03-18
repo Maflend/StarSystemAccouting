@@ -17,13 +17,10 @@ export class StarSystemCreateComponent{
     constructor(public starSystemService: StarSystemService){}
 
     ngOnInit(){
-
     }
 
     submit(myForm: NgForm){
         this.starSystemService.create(new StarSystemCreateRequest(myForm.value.name, myForm.value.age, myForm.value.centerOfGravityName,
             myForm.value.centerOfGravityType, myForm.value.centerOfGravityAge, myForm.value.centerOfGravityDiameter, myForm.value.centerOfGravityWeight));
-            
-        
     }
 }

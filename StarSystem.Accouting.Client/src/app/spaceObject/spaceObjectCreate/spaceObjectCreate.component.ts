@@ -8,9 +8,6 @@ import {StarSystem} from '../../starSystem/models/starSystem.model';
 import { Guid } from "guid-typescript";
 import { NgForm } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Observable } from 'rxjs';
-
-
 
 @Component({
     selector:'spaceObjectCreate-comp',
@@ -30,8 +27,6 @@ export class SpaceObjectCreateComponent implements OnInit{
         this.id = this.starSystem.filter(s=>s.name == myForm.value.starSystemName)[0].id;
         this.spaceObjectService.create(new SpaceObjectCreateRequest( myForm.value.name,
             myForm.value.type, myForm.value.age, myForm.value.diameter, myForm.value.weight, this.id));
-
-        
     }
    
     ngOnInit(){

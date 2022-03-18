@@ -11,7 +11,7 @@ import {ErrorHandlerService} from './errorHandler.service';
 export class SpaceObjectService {
     constructor(private http: HttpClient, private errorHandlerService: ErrorHandlerService){}
   
-    readonly apiUrl:string = "https://localhost:7090/api/";
+    readonly apiUrl:string = "https://localhost:7090/api";
 
 
     errorMessage: string = "";
@@ -19,13 +19,13 @@ export class SpaceObjectService {
 
 
     getAll() {
-        return this.http.get("https://localhost:7090/api/SpaceObject/GetAll");
+        return this.http.get(this.apiUrl + "/SpaceObject/GetAll");
     }
     getById(id: Guid){
-        return this.http.get("https://localhost:7090/api/SpaceObject/GetById?id="+ id);
+        return this.http.get(this.apiUrl +  "/SpaceObject/GetById?id="+ id);
     }
     create(spaceObjectCreate: SpaceObjectCreateRequest){
-        return this.http.post("https://localhost:7090/api/SpaceObject/Create",spaceObjectCreate).subscribe(
+        return this.http.post( this.apiUrl + "/SpaceObject/Create",spaceObjectCreate).subscribe(
             data => {
             console.log("Создал обьект с id: ", data);
             window.location.href = '/spaceObject/toList';
@@ -38,10 +38,10 @@ export class SpaceObjectService {
             
     }
     getAllByStarSystemId(id: Guid){
-        return this.http.get("https://localhost:7090/api/SpaceObject/GetAllByStarSystemId?StarSystemId=" + id);
+        return this.http.get( this.apiUrl + "/SpaceObject/GetAllByStarSystemId?StarSystemId=" + id);
     }
     delete(id:Guid){
-        return this.http.delete("https://localhost:7090/api/SpaceObject/Delete/"+ id).subscribe(
+        return this.http.delete(this.apiUrl + "/SpaceObject/Delete/"+ id).subscribe(
             data => {
             console.log("Удалил обьект с id: ", data);
             window.location.href = '/spaceObject/toList';
@@ -56,7 +56,7 @@ export class SpaceObjectService {
         console.log("id:" + spaceObj.id + "|| name:" + spaceObj.name);
         console.log("type:" + spaceObj.type + "|| weight:" + spaceObj.weight);
         console.log("diameter:" + spaceObj.diameter + "|| age:" + spaceObj.name);
-        return this.http.post("https://localhost:7090/api/SpaceObject/Update", spaceObj).subscribe(
+        return this.http.post(this.apiUrl + "/SpaceObject/Update", spaceObj).subscribe(
             data => {
             console.log("Обновил обьект с id: ", data);
             window.location.href = '/spaceObject/toList';

@@ -9,9 +9,11 @@ export class StarSystemService {
 
     errorMessage: string = "";
 
+    readonly apiUrl:string = "https://localhost:7090/api";
+
     constructor(private http: HttpClient, private errorHandlerService: ErrorHandlerService){}
     create(request: StarSystemCreateRequest){
-        return this.http.post("https://localhost:7090/api/StarSystem/Create", request).subscribe(
+        return this.http.post(this.apiUrl +  "/StarSystem/Create", request).subscribe(
             data=>{
                 window.location.href="/starSystem/toList";
             },
@@ -23,10 +25,10 @@ export class StarSystemService {
         );
     }
     getAll() {
-        return this.http.get("https://localhost:7090/api/StarSystem/GetAll");
+        return this.http.get(this.apiUrl + "/StarSystem/GetAll");
     }
     update(starSystemUpdateRequest: StarSystemUpdateRequest, starSystemId: Guid, spaceObjectId: Guid){
-        return this.http.post("https://localhost:7090/api/StarSystem/Update", starSystemUpdateRequest).subscribe(
+        return this.http.post(this.apiUrl + "/StarSystem/Update", starSystemUpdateRequest).subscribe(
             data => {
             console.log("Обновил звездную систему с id: ", data);
             this.setCenterOfGravity(starSystemId,spaceObjectId);
@@ -38,12 +40,12 @@ export class StarSystemService {
             });
     }
     getById(id:Guid){
-        return this.http.get("https://localhost:7090/api/StarSystem/GetById?id=" + id);
+        return this.http.get(this.apiUrl + "/StarSystem/GetById?id=" + id);
     }
     setCenterOfGravity(starSystemId: Guid, spaceObjectId: Guid){
         var mydata = new Data(starSystemId, spaceObjectId);
       
-        return this.http.post("https://localhost:7090/api/StarSystem/SetCenterOfGravity", mydata).subscribe(
+        return this.http.post(this.apiUrl +  "/StarSystem/SetCenterOfGravity", mydata).subscribe(
             data => {
             console.log("Изменил центр: ", data);
             window.location.href = '/starSystem/toList';
@@ -55,7 +57,7 @@ export class StarSystemService {
             });
     }
     delete(id: Guid){
-        return this.http.delete("https://localhost:7090/api/StarSystem/Delete/" + id).subscribe(
+        return this.http.delete(this.apiUrl + "/StarSystem/Delete/" + id).subscribe(
             data => {
             console.log("Удалил обьект с id: ", data);
             window.location.href = '/starSystem/toList';

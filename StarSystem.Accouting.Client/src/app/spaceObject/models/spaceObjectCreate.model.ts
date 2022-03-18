@@ -1,4 +1,3 @@
-
 export class SpaceObjectCreate{
     public name: string = "";
     public type: string = "";

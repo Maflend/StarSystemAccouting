@@ -6,7 +6,6 @@ import {Component, OnInit} from '@angular/core'
 
 export class StarSystemComponent implements OnInit{
     ngOnInit(){
-       
     }
 
 }
