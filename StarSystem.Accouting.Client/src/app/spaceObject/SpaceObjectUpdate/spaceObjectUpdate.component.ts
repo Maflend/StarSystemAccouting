@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core'
-import {SpaceObjectService} from '../../services/spaceObject.service'
+import {SpaceObjectService} from '../../services/spaceObject.service';
+import {ErrorHandlerService} from '../../services/errorHandler.service';
 import {SpaceObjectCreate} from '../models/spaceObjectCreate.model';
 import {SpaceObjectCreateRequest} from '../models/spaceObjectCreateRequest.model';
 import {StarSystem} from '../../starSystem/models/starSystem.model'
@@ -14,14 +15,14 @@ import { ActivatedRoute} from '@angular/router';
 @Component({
     selector:'spaceObjectCreate-comp',
     templateUrl: './spaceObjectUpdate.html',
-    providers:[SpaceObjectService]
+    providers:[SpaceObjectService, ErrorHandlerService]
 })
 
 export class SpaceObjectUpdateComponent implements OnInit{
     spaceObject: SpaceObjectCreate = new SpaceObjectCreate();
     id:Guid = Guid.createEmpty();
     
-    constructor(private spaceObjectService: SpaceObjectService, private activateRoute: ActivatedRoute){
+    constructor(public spaceObjectService: SpaceObjectService, private activateRoute: ActivatedRoute){
         this.id = activateRoute.snapshot.params['id'];
         console.log(this.id);
     }

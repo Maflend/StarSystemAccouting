@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { Guid } from 'guid-typescript';
 import {StarSystemService} from '../../services/starSystem.service';
+import {ErrorHandlerService} from '../../services/errorHandler.service';
 import {StarSystem} from '../models/starSystem.model';
 
 @Component({
     selector: 'starSystemList-comp',
     templateUrl: './starSystemList.html',
-    providers: [StarSystemService] 
+    providers: [StarSystemService, ErrorHandlerService] 
 })
 export class StarSystemListComponent implements OnInit { 
-    constructor(private starSystemService: StarSystemService){}
+    constructor(public starSystemService: StarSystemService){}
     starSystems: StarSystem[] = [];
 
     ngOnInit(){

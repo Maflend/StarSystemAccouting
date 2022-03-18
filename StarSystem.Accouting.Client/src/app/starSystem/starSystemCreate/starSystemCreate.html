@@ -1,38 +1,42 @@
+<p class="text-danger">{{this.starSystemService.errorMessage}}</p>
+
 <form #myForm="ngForm" novalidate>
     <div class="form-group">
       <label>Наименование</label>
-      <input class="form-control" name="name" [(ngModel)]= "starSystemCreate.name"/>
+      <input class="form-control" name="name" [(ngModel)]= "starSystemCreate.name" #name="ngModel" required/>
     </div>
     <div class="form-group">
       <label>Возвраст</label>
-      <input class="form-control" name="age" [(ngModel)]= "starSystemCreate.age"/>
+      <input class="form-control" name="age" [(ngModel)]= "starSystemCreate.age" #age="ngModel" required/>
     </div>
     
     <br>
-    <label>Создание начального космического обьекта (центра гравитации)</label>
+    <p>Создание начального космического обьекта (центра гравитации)</p>
     <br>
     <div class="form-group">
       <label>Наименование</label>
-      <input class="form-control" name="centerOfGravityName" [(ngModel)]= "starSystemCreate.centerOfGravityName"/>
+      <input class="form-control" name="centerOfGravityName" [(ngModel)]= "starSystemCreate.centerOfGravityName" #centerOfGravityName="ngModel" required/>
     </div>
     <div class="form-group">
       <label>Тип</label>
-      <input class="form-control"  name="centerOfGravityType" [(ngModel)]= "starSystemCreate.centerOfGravityType"/>
+      <input class="form-control"  name="centerOfGravityType" [(ngModel)]= "starSystemCreate.centerOfGravityType"  #centerOfGravityType="ngModel" required/>
     </div>
     <div class="form-group">
       <label>Возвраст</label>
-      <input class="form-control"  type="number" name="centerOfGravityAge" [(ngModel)]= "starSystemCreate.centerOfGravityAge"/>
+      <input class="form-control"  type="number" name="centerOfGravityAge" [(ngModel)]= "starSystemCreate.centerOfGravityAge"  #centerOfGravityAge="ngModel" required/>
     </div>
     <div class="form-group">
         <label>Диаметр</label>
-        <input class="form-control"  name="centerOfGravityDiameter" [(ngModel)]= "starSystemCreate.centerOfGravityDiameter"/>
+        <input class="form-control"  name="centerOfGravityDiameter" [(ngModel)]= "starSystemCreate.centerOfGravityDiameter"  #centerOfGravityDiameter="ngModel" required/>
       </div>
       <div class="form-group">
         <label>Масса</label>
-        <input class="form-control"  name="centerOfGravityWeight" [(ngModel)]= "starSystemCreate.centerOfGravityWeight"/>
+        <input class="form-control"  name="centerOfGravityWeight" [(ngModel)]= "starSystemCreate.centerOfGravityWeight"  #centerOfGravityWeight="ngModel" required/>
       </div>
       
     <br/>
-    <button class="btn btn-primary mt-2" (click)="submit(myForm)">Создать</button>
+    <button class="btn btn-primary mt-2" (click)="submit(myForm)" [disabled]= "name.invalid || age.invalid || centerOfGravityName.invalid || centerOfGravityType.invalid || centerOfGravityAge.invalid || centerOfGravityDiameter.invalid || centerOfGravityWeight.invalid">
+        Создать
+    </button>
     </form>
   

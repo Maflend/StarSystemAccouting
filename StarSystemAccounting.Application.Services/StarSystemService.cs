@@ -210,8 +210,7 @@ namespace StarSystemAccouting.Application.Services
                 return new ServiceResponse<Guid>()
                 {
                     Status = false,
-                    Message = ex.Message,
-                    Data = starSystem.Id
+                    Message = "Звездная система с таким именем уже существует"
                 };
             }
 

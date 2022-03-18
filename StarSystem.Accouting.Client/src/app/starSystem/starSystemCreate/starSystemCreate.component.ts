@@ -1,19 +1,20 @@
 import {Component} from '@angular/core';
 import { NgForm } from '@angular/forms';
 import {StarSystemService} from '../../services/starSystem.service';
+import {ErrorHandlerService} from '../../services/errorHandler.service';
 import { StarSystemCreateRequest } from '../models/starSystemCreateRequest.model';
 import { StarSystemCreate} from '../models/starSystemCreate.model';
 @Component({
     selector:"starSystemCreate-comp",
     templateUrl: './starSystemCreate.html',
-    providers: [StarSystemService]
+    providers: [StarSystemService, ErrorHandlerService]
 })
 
 export class StarSystemCreateComponent{
 
     starSystemCreate: StarSystemCreate = new StarSystemCreate();
 
-    constructor(private starSystemService: StarSystemService){}
+    constructor(public starSystemService: StarSystemService){}
 
     ngOnInit(){
 

@@ -6,11 +6,18 @@ import { catchError, Observable } from 'rxjs';
 import { SpaceObjectCreate } from '../spaceObject/models/spaceObjectCreate.model';
 import {SpaceObjectCreateRequest} from '../spaceObject/models/spaceObjectCreateRequest.model';
 import {SpaceObjectUpdate} from '../spaceObject/models/SpaceObjectUpdate.model';
+import {ErrorHandlerService} from './errorHandler.service';
 @Injectable()
 export class SpaceObjectService {
-    constructor(private http: HttpClient){}
-    errorMessage: string = "";
+    constructor(private http: HttpClient, private errorHandlerService: ErrorHandlerService){}
+  
     readonly apiUrl:string = "https://localhost:7090/api/";
+
+
+    errorMessage: string = "";
+   
+
+
     getAll() {
         return this.http.get("https://localhost:7090/api/SpaceObject/GetAll");
     }
@@ -25,7 +32,8 @@ export class SpaceObjectService {
             },
             err => {
             console.log("ErrorCreate:", err);
-            
+            this.errorHandlerService.handleError(err);
+            this.errorMessage =  this.errorHandlerService.errorMessage;
             });
             
     }
@@ -40,6 +48,8 @@ export class SpaceObjectService {
             },
             err => {
             console.log("ErrorDelete:", err);
+            this.errorHandlerService.handleError(err);
+            this.errorMessage =  this.errorHandlerService.errorMessage;
             });
     }
     update(spaceObj:SpaceObjectUpdate){
@@ -53,7 +63,16 @@ export class SpaceObjectService {
             },
             err => {
             console.log("ErrorUpdate:", err);
+            this.errorHandlerService.handleError(err);
+            this.errorMessage =  this.errorHandlerService.errorMessage;
             });
     }
+
+
+
+
+
+
+    
 
 }

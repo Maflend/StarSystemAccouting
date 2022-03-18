@@ -44,7 +44,7 @@ namespace StarSystemAccouting.Application.Services
                 return new ServiceResponse<Guid>
                 {
                     Status = false,
-                    Message = "Тип космического обьекта должен быть Звезда / Черная дыра",
+                    Message = "Тип космического обьекта для установления центром гравитации должен быть Звезда / Черная дыра",
                     Data = new()
                 };
 

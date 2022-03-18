@@ -46,20 +46,21 @@ namespace StarSystemAccouting.Application.Services
             };
         }
 
-        public async Task<ServiceResponse<List<SpaceObjectResponse>>> GetAll()
+        public async Task<ServiceResponse<List<SpaceObjectWithStarSystemNameResponse>>> GetAll()
         {
             var spaceObjectEntities = await _db.SpaceObjects
-                .Select(sobj => new SpaceObjectResponse {
+                .Include(sobj=>sobj.StarSystem)
+                .Select(sobj => new SpaceObjectWithStarSystemNameResponse{
                 Id = sobj.Id,
                 Age = sobj.Age,
                 Diameter = sobj.Diameter,
                 Name = sobj.Name,
                 Type = sobj.Type,
                 Weight = sobj.Weight,
-                StarSystemId = sobj.StarSystemId})
+                StarSystemName = sobj.StarSystem.Name})
                 .ToListAsync();
 
-            return new ServiceResponse<List<SpaceObjectResponse>>()
+            return new ServiceResponse<List<SpaceObjectWithStarSystemNameResponse>>()
             {
                 Status = true,
                 Data = spaceObjectEntities
@@ -190,7 +191,18 @@ namespace StarSystemAccouting.Application.Services
             spaceObject.Type = request.Type;
             spaceObject.Weight = request.Weight;
 
-            await _db.SaveChangesAsync();
+            try
+            {
+                await _db.SaveChangesAsync();
+            }
+            catch(Exception ex)
+            {
+                return new ServiceResponse<Guid>()
+                {
+                    Status = false,
+                    Message = "Космический обьект с таким именем уже существует"
+                };
+            }
 
             return new ServiceResponse<Guid>()
             {
@@ -200,8 +212,16 @@ namespace StarSystemAccouting.Application.Services
 
         }
 
-        public async Task<ServiceResponse<Guid>> DeleteAsync(Guid id) //Запретить удаление если обьект является центром масс для системы пока пользователь не выберет другой обьект центром.
+        public async Task<ServiceResponse<Guid>> DeleteAsync(Guid id)
         {
+            if(_db.StarSystems.Any(s=>s.CenterOfGravityId == id))
+            {
+                return new ServiceResponse<Guid>()
+                {
+                    Status = false,
+                    Message = $"Космический обьект: {_db.SpaceObjects.FirstOrDefault(sobj=>sobj.Id == id)?.Name} является центром гравитации. Смените его в меню редактирования звездной системы"
+                };
+            }
             try
             {
                 _db.SpaceObjects.Remove(new SpaceObject { Id = id });

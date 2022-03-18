@@ -1,11 +1,15 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Guid } from "guid-typescript";
-import {StarSystemUpdateRequest} from '../starSystem/models/starSystemUpdateRequest.model'
+import {StarSystemUpdateRequest} from '../starSystem/models/starSystemUpdateRequest.model';
 import {StarSystemCreateRequest} from '../starSystem/models/starSystemCreateRequest.model';
+import {ErrorHandlerService} from './errorHandler.service';
 @Injectable()
 export class StarSystemService {
-    constructor(private http: HttpClient){}
+
+    errorMessage: string = "";
+
+    constructor(private http: HttpClient, private errorHandlerService: ErrorHandlerService){}
     create(request: StarSystemCreateRequest){
         return this.http.post("https://localhost:7090/api/StarSystem/Create", request).subscribe(
             data=>{
@@ -13,6 +17,8 @@ export class StarSystemService {
             },
             err=>{
                 console.log("ErrorCreate:", err);
+                this.errorHandlerService.handleError(err);
+                this.errorMessage =  this.errorHandlerService.errorMessage;
             }
         );
     }
@@ -27,6 +33,8 @@ export class StarSystemService {
             },
             err => {
             console.log("ErrorUpdate:", err);
+            this.errorHandlerService.handleError(err);
+            this.errorMessage =  this.errorHandlerService.errorMessage;
             });
     }
     getById(id:Guid){
@@ -42,6 +50,8 @@ export class StarSystemService {
             },
             err => {
             console.log("ErrorSetCenterOfGravity:", err);
+            this.errorHandlerService.handleError(err);
+            this.errorMessage =  this.errorHandlerService.errorMessage;
             });
     }
     delete(id: Guid){
@@ -52,6 +62,8 @@ export class StarSystemService {
             },
             err => {
             console.log("ErrorDelete:", err);
+            this.errorHandlerService.handleError(err);
+            this.errorMessage =  this.errorHandlerService.errorMessage;
             });
     }
 }

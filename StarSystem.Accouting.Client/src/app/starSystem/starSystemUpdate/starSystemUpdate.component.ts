@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Guid } from 'guid-typescript';
 import {Data, StarSystemService} from '../../services/starSystem.service';
 import { SpaceObjectService } from 'src/app/services/spaceObject.service';
+import {ErrorHandlerService} from '../../services/errorHandler.service';
 import { NgForm } from '@angular/forms';
 import { StarSystemUpdateRequest } from '../models/starSystemUpdateRequest.model';
 import { takeLast } from 'rxjs';
@@ -12,7 +13,7 @@ import { compileFunction } from 'vm';
 @Component({
  selector:'starSystemUpdate-comp',
  templateUrl:'./starSystemUpdate.html',
- providers:[StarSystemService, SpaceObjectService]
+ providers:[StarSystemService, SpaceObjectService, ErrorHandlerService]
 })
 export class StarSystemUpdateComponent{
     starSystem: StarSystem = new StarSystem();
@@ -21,7 +22,7 @@ export class StarSystemUpdateComponent{
     spaceObjectid: Guid = Guid.createEmpty();
     currentCenterOfGravity: string = "";
 
-    constructor(private activatedRoute: ActivatedRoute, private starSystemService: StarSystemService, private spaceObjectService: SpaceObjectService){
+    constructor(private activatedRoute: ActivatedRoute, public starSystemService: StarSystemService, public spaceObjectService: SpaceObjectService){
         this.starSystemId = activatedRoute.snapshot.params['id'];
         
     }

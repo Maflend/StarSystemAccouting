@@ -1,4 +1,5 @@
 <form #myForm="ngForm" novalidate>
+  <p class="text-danger">{{this.spaceObjectService.errorMessage}}</p>
   <div class="form-group">
     <label>Наименование</label>
     <input class="form-control" name="name" [(ngModel)]= "spaceObject.name" #name="ngModel" required />
